@@ -11,3 +11,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    volumes:
+      - .:/app
+  c9:
+    image: kdelfour/cloud9-docker
+    volumes:
+      - .:/workspace/
+    ports:
+      - "8001:80"
+    depends_on:
+      - web
