@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flat HTML5/CSS3 Login Form</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="login-page">
+  <div class="form">
+    <form class="register-form">
+    <input type="text" placeholder="name"/>
+    <input type="password" placeholder="password"/>
+    <input type="text" placeholder="email address"/>
+    <button>create</button>
+    <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" method="POST" action="/accounts/login"> {% csrf_token %} 
+    <input type="text" placeholder="username"/>
+    <input type="password" placeholder="loginpassword"/>
+    <button>login</button>
+    <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+  </div>
+  <script src="{% static 'js/login.js' %}"></script>
+  {% if errors %}
+  <script>
+    swal("", '{{ errors }}',"error");
+  </script>
+  {% endif %}
+</body>
+</html>
