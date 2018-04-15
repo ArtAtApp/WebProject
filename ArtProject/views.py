@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # Create your views here.
 
+#--------- Homepage ---------
 def homepage(request):
 	template = get_template("homepage.html")
 	variables = {
@@ -20,6 +21,7 @@ def homepage(request):
 	output = template.render(variables)
 	return HttpResponse(output)
 
+#--------- User Login ---------
 def UserLogin(request):
 	if request.method == "GET":
 		return GetLogin(request)
