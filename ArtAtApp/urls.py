@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
-from ArtProject.views import UserLogin
+from ArtProject.views import UserLogin, homepage
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', homepage, name = 'homepage'),
     url(r'^accounts/login$', UserLogin, name="login"),
     url(r'^accounts/logout$', logout, name="logout"),
 ]

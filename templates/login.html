@@ -18,10 +18,10 @@
         <p class="message">Already registered? <a href="#">Sign In</a></p>
       </form>-->
       <form class="login-form" action="/accounts/login" method="POST"> {% csrf_token %} 
-        <input type="text" id="user" name="username" placeholder="username"/>
-        <input type="password" id="pass" name="loginpassword" placeholder="password"/>
+        <input type="text" id="userlogin" name="usernamelogin" placeholder="username" />
+        <input type="password" id="passlogin" name="passwordlogin" placeholder="password" />
         <button>login</button>
-        <p class="message">Not registered? <a href="#">Create an account</a></p>
+        <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
       </form>
     </div>
   </div>

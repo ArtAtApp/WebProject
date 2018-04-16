@@ -22,7 +22,9 @@ def homepage(request):
 	return HttpResponse(output)
 
 #--------- User Login ---------
+#@login_required(login_url='/accounts/login')
 def UserLogin(request):
+
 	if request.method == "GET":
 		return GetLogin(request)
 	elif request.method == "POST":
@@ -51,6 +53,6 @@ def Postlogin(request):
 
 
 def get_user_login_data(request):
-	password = request.POST.get('loginpassword', None)
-	username = request.POST.get('username', None)
+	password = request.POST.get('passlogin', None)
+	username = request.POST.get('userelogin', None)
 	return password, username
