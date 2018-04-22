@@ -14,7 +14,11 @@ class Person(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	first_name = models.CharField(blank=False, null=False, max_length=30)
 	last_name = models.CharField(blank=False, null=False, max_length=30)
+<<<<<<< HEAD
 	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', 
+=======
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+>>>>>>> master
 		message="Phone number must be entered in the format: '+999999999'. "
 		"Up to 15 digits allowed.")
 	phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
@@ -33,7 +37,11 @@ class Person(models.Model):
 
 	class Meta:
 		abstract = True
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> master
 
 class Artist(Person):
 	bank_account = models.CharField(blank=False, null=False, max_length=34)
@@ -64,4 +72,8 @@ class Event(models.Model):
 	created_by = models.ForeignKey(Organizer, on_delete = models.CASCADE)
 	ini_date = models.DateTimeField()
 	end_date = models.DateTimeField()
+<<<<<<< HEAD
 	artwork = models.ManyToManyField(Artwork, blank=True)
+=======
+artwork = models.ManyToManyField(Artwork, blank=True)
+>>>>>>> master

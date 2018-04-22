@@ -25,7 +25,7 @@ SECRET_KEY = 'wj_mn8mw8_--sg5kf79v$7(aq%_1v@jf(qa73_pcl!6d_jqb(x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'afternoon-hamlet-15993.herokuapp.com']
 
 
 # Application definition
@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'ArtProject'
+=======
+    'ArtProject',
+>>>>>>> master
 ]
 
 MIDDLEWARE = [
@@ -127,4 +131,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
 os.path.join(BASE_DIR, 'static'),
 )
+<<<<<<< HEAD
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage''
+=======
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+>>>>>>> master
