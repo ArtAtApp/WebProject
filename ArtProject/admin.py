@@ -4,7 +4,6 @@ import models
 from django.contrib import admin
 
 # Register your models here.
-admin.site.register(models.Person)
 admin.site.register(models.Artist)
 admin.site.register(models.Organizer)
 admin.site.register(models.Customer)
