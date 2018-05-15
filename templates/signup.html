@@ -10,20 +10,15 @@
 <body>
   <div class="login-page">
     <div class="form">
-      <!--<form class="register-form" action="/accounts/login" method="POST"> {% csrf_token %}
-        <input type="text" placeholder="name"/>
-        <input type="password" placeholder="password"/>
-        <input type="text" placeholder="email address"/>
-        <button>create</button>
-        <p class="message">Already registered? <a href="#">Sign In</a></p>
-      </form>-->
       <form class="login-form" action="/accounts/login" method="POST"> {% csrf_token %}
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="username" name="usernamelogin" placeholder="username" required/>
+        <input type="text" id="username" name="usernamesignup" placeholder="username" required/>
         <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Password</label>
-        <input type="password" id="password" name="passwordlogin" placeholder="password" required/>
-        <button type="submit">login</button>
-        <p class="message">Not registered? <a href="/accounts/rolechoice">Create an account</a></p>
+        <input type="password" id="password" name="passwordsignup" placeholder="password" required/>
+        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> e-mail</label>
+        <input type="text" id="email" name="emailsignup" placeholder="email" required/>
+        <button type="submit">create</button>
+        <p class="message">Already registered? <a href="/accounts/login">Sign In</a></p>
       </form>
     </div>
   </div>

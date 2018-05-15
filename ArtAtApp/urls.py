@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
-from ArtProject.views import UserLogin, homepage
+from ArtProject.views import UserLogin, homepage, UserSignUp, RoleChoice
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homepage, name = 'homepage'),
     url(r'^accounts/login$', UserLogin, name="login"),
     url(r'^accounts/logout$', logout, name="logout"),
+    url(r'^accounts/signup$', UserSignUp, name="singup"),
+    url(r'^accounts/rolechoice$', RoleChoice, name="rolechoice"),
 ]
