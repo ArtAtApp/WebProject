@@ -11,15 +11,19 @@
   <div class="login-page">
     <div class="form">
       <form class="login-form" action="/accounts/rolechoice" method="POST"> {% csrf_token %}
-        <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your role</label>
-        <br>
-        <select id="role" name="role" required>
-        <option value="Customer" selected="Customer">Customer</option>
-        <option value="Artist">Artist</option>
-        <option value="Organizer">Organizer</option>
-        </select>
-        <br>
-        <button type="submit">Continue</button>
+        <div id="formText">
+          <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your role</label>
+        </div>
+        <div class="dropdownMenu">
+          <select id="role" name="role" required>
+          <option value="Customer" selected="Customer">Customer</option>
+          <option value="Artist">Artist</option>
+          <option value="Organizer">Organizer</option>
+          </select>
+        </div>
+        <div class="button">
+          <button type="submit">Continue</button>
+        </div>
         <p class="message">Already registered? <a href="/accounts/login">Sign In</a></p>
       </form>
     </div>
