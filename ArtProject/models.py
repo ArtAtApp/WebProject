@@ -64,4 +64,4 @@ class Event(models.Model):
 	created_by = models.ForeignKey(Organizer, on_delete = models.CASCADE)
 	ini_date = models.DateTimeField()
 	end_date = models.DateTimeField()
-artwork = models.ManyToManyField(Artwork, blank=True)
+	artwork = models.ManyToManyField(Artwork, blank=True)

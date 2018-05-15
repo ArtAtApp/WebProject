@@ -4,3 +4,4 @@ dj-database-url
 gunicorn
 whitenoise
 docker-py==1.8.1
+behave==1.2.6
