@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <title>Flat HTML5/CSS3 Login Form</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
   <div class="login-page">
@@ -23,7 +24,7 @@
         <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Password</label>
         <input type="password" id="password" name="passwordlogin" placeholder="password" required/>
         <button type="submit">login</button>
-        <p class="message">Not registered? <a href="/accounts/rolechoice">Create an account</a></p>
+        <p class="message">Not registered? <a href="/accounts/signup">Create an account</a></p>
       </form>
     </div>
   </div>

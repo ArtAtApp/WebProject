@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.models import User
 # Create your views here.
 
 #--------- Homepage ---------
@@ -44,10 +44,9 @@ def Postlogin(request):
 
 		return HttpResponseRedirect(reverse("homepage"))
 	except:
-		context = {
+		return render(request, 'login.html', {
 			'errors': 'Incorrect credentials'
-		}
-		return render(request, 'UserLogin.html', context=context)
+		})
 
 def get_user_login_data(request):
 	password = request.POST.get('passwordlogin', None)
@@ -66,16 +65,28 @@ def get_member(user):
 
 #---------- Role choice ----------
 def RoleChoice(request):
-    if request.method == "GET":
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse("homepage"))
+    elif request.method == "GET":
         return render(request, "rolechoice.html", {
             'msg': request.GET.get('msg', None),
             'type': request.GET.get('type', None)
         })
     elif request.method == "POST":
         return render(request, "signup.html", {
-            'msg': request.GET.get('msg', None),
-            'type': request.GET.get('type', None)
+            'role' : request.POST.get('role', None)
         })
+
+def get_general_data(request):
+	username = request.POST.get('usernamesignup', None)
+	password = request.POST.get('passwordsignup', None)
+	email = request.POST.get('emailsignup', None)
+	user = User.objects.create_user(username, password, email)
+	dni = request.POST.get('dnisignup', None)
+	firstname = request.POST.get('firstnamesignup', None)
+	lastname = request.POST.get('dnisignup', None)
+	phonenumber = request.POST.get('phonenumbersignup', None)
+	return user, dni, firstname, lastname, phonenumber
 
 #---------- User signup ----------
 def UserSignUp(request):
@@ -87,22 +98,45 @@ def UserSignUp(request):
             'type': request.GET.get('type', None)
         })
     elif request.method == "POST":
-        return Postlogin(request)
+        return PostSignUp(request)
 
 def PostSignUp(request):
-	password, username = get_user_login_data(request)
-	try:
-		user = authenticate(username=username, password=password)
+	role = request.POST.get('role', None)
+	if (role == 'Customer'):
+		user, dni, firstname, lastname, phonenumber = get_general_data(request)
+		bank_account = request.POST.get('bank_account_signup', None)
+		customer = Customer(dni, user, firstname, lastname, phonenumber,\
+		role, bank_account)
+		customer.save()
+		user.save()
 		login(request, user)
+		return HttpResponseRedirect(reverse('homepage'))
+	elif (role == 'Artist'):
+		user, dni, firstname, lastname, phonenumber = get_general_data(request)
+		bank_account = request.POST.get('bank_account_signup', None)
+		artist = Artist(dni, user, firstname, lastname, phonenumber,\
+		role, bank_account)
+		artist.save()
+		user.save()
+		login(request, user)
+		return HttpResponseRedirect(reverse('homepage'))
+	elif (role == 'Organizer'):
+		user, dni, firstname, lastname, phonenumber = get_general_data(request)
+		cif = request.POST.get('afiliation_CIF_signup', None)
+		organizer = Organizer(dni, user, firstname, lastname, phonenumber,\
+		role, cif)
+		organizer.save()
+		user.save()
+		login(request, user)
+		return HttpResponseRedirect(reverse('homepage'))
 
-		return HttpResponseRedirect(reverse("homepage"))
-	except:
-		context = {
-			'errors': 'Incorrect credentials'
-		}
-		return render(request, 'UserLogin.html', context=context)
-
-def get_user_signup_data(request):
-	password = request.POST.get('passwordlogin', None)
-	username = request.POST.get('usernamelogin', None)
-	return password, username
+def get_general_data(request):
+	username = request.POST.get('usernamesignup', None)
+	password = request.POST.get('passwordsignup', None)
+	email = request.POST.get('emailsignup', None)
+	user = User.objects.create_user(username, password, email)
+	dni = request.POST.get('dnisignup', None)
+	firstname = request.POST.get('firstnamesignup', None)
+	lastname = request.POST.get('dnisignup', None)
+	phonenumber = request.POST.get('phonenumbersignup', None)
+	return user, dni, firstname, lastname, phonenumber
