@@ -18,10 +18,6 @@ services:
     volumes:
       - .:/workspace/
     ports:
-<<<<<<< HEAD
       - "8001:80"
-=======
-      - "8000:80"
->>>>>>> 0aa1578b87f28e77f858acaa545b408d0705d10e
     depends_on:
       - web
