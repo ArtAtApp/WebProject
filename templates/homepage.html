@@ -1,0 +1,81 @@
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %} Homepage {% endblock title %}
+    </title>
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" />
+    <!-- Linking the stylesheets -->
+    {% block stylesheets %}
+    <!-- <link rel="stylesheet" href="{% static 'markdown/css/bootstrap-markdown.min.css' %}"> -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock stylesheets %}
+</head>
+
+<body>
+    {% block navbar %}
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" style="background-color: #76b852">
+        <!-- <a class="navbar-brand"  %}">
+            <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top"> ElJuernes
+        </a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          {% include "navbars/artist_navbar.html" %}
+            <!-- {% if role == 'Editor' %}
+                {% include "navbars/editor_navbar.html" %}
+            {% elif role == 'Editor in chief' %}
+                {% include "navbars/cheif_editor_navbar.html"%}
+            {% else %}
+                {% comment %} TODO {% endcomment %}
+            {% endif %} -->
+
+        </div>
+
+    </nav>
+    {% endblock navbar %}
+    <div id="content" class="container" style="padding-top: 100px; padding-bottom: 100px">
+        {% block content %} Web content {% endblock content %}
+    </div>
+    <div id="footer" class="footer bg-dark">
+        {% block footer %}
+        <div class="container text-white">
+            <span>Developed by ArtAtApp. View organization on
+                <a href="https://github.com/ArtAtApp">Github</a>
+                <i class="fab fa-github-alt"></i>
+            </span>
+        </div>
+        {% endblock footer %}
+    </div>
+    <!-- Linking the scripts -->
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{% static 'markdown/js/bootstrap-markdown.js' %}"></script>
+    {% endblock scripts %} {% block custom_scripts %} {% endblock custom_scripts %}
+    {% if msg %}
+    <script>
+      swal("", '{{ msg }}','{{ type }}');
+    </script>
+    {% endif %}
+</body>
+
+</html>
