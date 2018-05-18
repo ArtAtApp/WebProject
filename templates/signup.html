@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Flat HTML5/CSS3 Login Form</title>
+  <title>Sign Up</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -15,7 +15,7 @@
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your role</label>
         <br>
         <select id="role" name="role" required>
-        <option value="Customer" onclick="customer()">Customer</option>
+        <option value="Customer" selected="Customer" onclick="customer()">Customer</option>
         <option value="Artist" onclick="customer()">Artist</option>
         <option value="Organizer" onclick="organizer()">Organizer</option>
         </select>
@@ -41,23 +41,25 @@
         </div>
         <div id="organizer" style="display: none;">
           <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Enterprise CIF</label>
-          <input type="text" id="afiliation_CIF" name="afiliation_CIF_signup" placeholder="Enterprise CIF" required/>
+          <input type="text" id="afiliation_CIF" name="afiliation_CIF_signup" placeholder="Enterprise CIF"/>
         </div>
         <button type="submit">Continue</button>
         <p class="message">Already registered? <a href="/accounts/login">Sign In</a></p>
       </form>
     </div>
   </div>
-  <script src="{% static 'js/login.js' %}"></script>
+  <!-- <script src="{% static 'js/login.js' %}"></script> -->
   <script>
   function customer(){
     var x = document.getElementById("customer");
     var y = document.getElementById("organizer");
     if (x.style.display == "none") {
       x.style.display = "block";
+      document.getElementById("bank_account").required = true;
     }
     if (y.style.display == "block"){
       y.style.display = "none"
+      document.getElementById("afiliation_CIF").required = false;
     }
   }
 
@@ -66,9 +68,11 @@
     var y = document.getElementById("organizer");
     if (y.style.display == "none") {
       y.style.display = "block";
+      document.getElementById("afiliation_CIF").required = true;
     }
     if (x.style.display == "block"){
       x.style.display = "none"
+      document.getElementById("bank_account").required = false;
     }
   }
   </script>
