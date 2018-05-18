@@ -120,6 +120,7 @@ def createArtist(request, role):
 	username, password, email, dni, firstname, lastname, phonenumber\
 	 = get_general_data(request)
 	try:
+		user = User.objects.create_user(username, password, email)
 		bank_account = request.POST.get('bank_account_signup', None)
 		artist = Artist(dni = dni, user = user, first_name = firstname,\
 		 last_name = lastname, phone_number = phonenumber,\
@@ -137,6 +138,7 @@ def createOrganizer(request, role):
 	username, password, email, dni, firstname, lastname, phonenumber\
 	 = get_general_data(request)
 	try:
+		user = User.objects.create_user(username, password, email)
 		cif = request.POST.get('afiliation_CIF_signup', None)
  		organizer = Organizer(dni = dni, user = user, first_name = firstname,\
  		 last_name = lastname, phone_number = phonenumber,\
