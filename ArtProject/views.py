@@ -79,8 +79,31 @@ def UserSignUp(request):
 def PostSignUp(request):
 	role = request.POST.get('role', None)
 	if (role == 'Customer'):
-		user, dni, firstname, lastname, phonenumber = get_general_data(request)
+		return createCustomer(request, role)
+
+	elif (role == 'Artist'):
+		return createArtist(request, role)
+
+	elif (role == 'Organizer'):
+		return createOrganizer(request, role)
+
+def get_general_data(request):
+	username = request.POST.get('usernamesignup', None)
+	password = request.POST.get('passwordsignup', None)
+	email = request.POST.get('emailsignup', None)
+	dni = request.POST.get('dnisignup', None)
+	firstname = request.POST.get('firstnamesignup', None)
+	lastname = request.POST.get('dnisignup', None)
+	phonenumber = request.POST.get('phonenumbersignup', None)
+	return username, password, email, dni, firstname, lastname, phonenumber
+
+def createCustomer(request, role):
+	username, password, email, dni, firstname, lastname, phonenumber\
+	 = get_general_data(request)
+	try:
+		user = User.objects.create_user(username, password, email)
 		bank_account = request.POST.get('bank_account_signup', None)
+		role = request.POST.get('role', None)
 		customer = Customer(dni = dni, user = user, first_name = firstname,\
 		last_name = lastname, phone_number = phonenumber,\
 		role = role, bank_account = bank_account)
@@ -88,9 +111,15 @@ def PostSignUp(request):
 		user.save()
 		login(request, user)
 		return HttpResponseRedirect(reverse('homepage'))
+	except:
+		return render(request, "signup.html", {
+            'errors': 'User already exists'
+        })
 
-	elif (role == 'Artist'):
-		user, dni, firstname, lastname, phonenumber = get_general_data(request)
+def createArtist(request, role):
+	username, password, email, dni, firstname, lastname, phonenumber\
+	 = get_general_data(request)
+	try:
 		bank_account = request.POST.get('bank_account_signup', None)
 		artist = Artist(dni = dni, user = user, first_name = firstname,\
 		 last_name = lastname, phone_number = phonenumber,\
@@ -99,42 +128,24 @@ def PostSignUp(request):
 		user.save()
 		login(request, user)
 		return HttpResponseRedirect(reverse('homepage'))
-	elif (role == 'Organizer'):
-		user, dni, firstname, lastname, phonenumber = get_general_data(request)
-		cif = request.POST.get('afiliation_CIF_signup', None)
-		organizer = Organizer(dni = dni, user = user, first_name = firstname,\
-		 last_name = lastname, phone_number = phonenumber,\
-		role = role, afiliation_CIF = cif)
-		organizer.save()
-		user.save()
-		login(request, user)
-		return HttpResponseRedirect(reverse('homepage'))
-
-def get_general_data(request):
-	try:
-		username = request.POST.get('usernamesignup', None)
-		password = request.POST.get('passwordsignup', None)
-		email = request.POST.get('emailsignup', None)
-		user = User.objects.create_user(username, password, email)
-		dni = request.POST.get('dnisignup', None)
-		firstname = request.POST.get('firstnamesignup', None)
-		lastname = request.POST.get('dnisignup', None)
-		phonenumber = request.POST.get('phonenumbersignup', None)
-		return user, dni, firstname, lastname, phonenumber
-
 	except:
 		return render(request, "signup.html", {
-			'errors': 'User already exists'
-		})
+            'errors': 'User already exists'
+        })
 
-def createCustormer(request, role):
-	user, dni, firstname, lastname, phonenumber = get_general_data(request)
-	bank_account = request.POST.get('bank_account_signup', None)
-	role = request.POST.get('role', None)
-	customer = Customer(dni = dni, user = user, first_name = firstname,\
-	last_name = lastname, phone_number = phonenumber,\
-	role = role, bank_account = bank_account)
-	customer.save()
-	user.save()
-	login(request, user)
-	return HttpResponseRedirect(reverse('homepage'))
+def createOrganizer(request, role):
+	username, password, email, dni, firstname, lastname, phonenumber\
+	 = get_general_data(request)
+	try:
+		cif = request.POST.get('afiliation_CIF_signup', None)
+ 		organizer = Organizer(dni = dni, user = user, first_name = firstname,\
+ 		 last_name = lastname, phone_number = phonenumber,\
+ 		role = role, afiliation_CIF = cif)
+ 		organizer.save()
+ 		user.save()
+ 		login(request, user)
+ 		return HttpResponseRedirect(reverse('homepage'))
+	except:
+		return render(request, "signup.html", {
+            'errors': 'User already exists'
+        })
