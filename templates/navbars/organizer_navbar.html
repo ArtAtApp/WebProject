@@ -1,10 +1,5 @@
 {% load staticfiles %}
 
-<head>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-</head>
-<body>
 <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
         <a class="nav-link w3-margin-left">
@@ -14,52 +9,6 @@
     </li>
     <li class="nav-item w3-margin-left">
             <li class="nav-item active">
-            <a class="nav-link" href="/staff/newslist">
+            <a class="nav-link" href="#">
                 <i class="fa fa-newspaper"></i> Create an event</a>
     </li>
-    <!-- <li class="nav-item w3-margin-left">
-            <li class="nav-item active">
-            <a class="nav-link" href="/staff/list_articles">
-                <i class="fa fa-pencil-alt"></i> Articles in process</a>
-    </li> -->
-    <!-- <li class="nav-item top">
-      <li class="nav-item active">
-        <button href="{% url 'logout' %}?next={% url 'login' %}">Logout</button>
-        <!-- <i class="fa fa-pencil-alt"></i> Logout</a> -->
-    </li> -->
-    <li class="nav-item w3-margin-top">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'logout' %}?next={% url 'login' %}">
-          Logout</a>
-    </li>
-    {% block scripts %}
-    {% endblock scripts %}
-    <script>
-      jQuery(document).ready(function logout() {
-
-        Parse.$ = jQuery;
-        Parse.initialize("...", "...");
-
-        $('.form-logout').on('submit', function (e) {
-            // Prevent Default Submit Event
-            e.preventDefault();
-
-            console.log("Performing submit");
-
-            //logout current user
-            if ( Parse.User.current() ) {
-                Parse.User.logOut();
-
-                // check if really logged out
-                if (Parse.User.current())
-                    console.log("Failed to log out!");
-            }
-
-            // do redirect
-            //window.location.replace("Sign_In.html");
-            // or
-            window.location.href = "/Sign_In.html";
-        });
-      });
-    </script>
-</body>
