@@ -25,9 +25,6 @@
 <body>
     {% block navbar %}
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" style="background-color: #76b852">
-        <!-- <a class="navbar-brand"  %}">
-            <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top"> ElJuernes
-        </a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,21 +33,14 @@
         {% if role == 'Organizer' %}
           {% include "navbars/organizer_navbar.html" %}
         {% endif %}
-            <!-- {% if role == 'Editor' %}
-                {% include "navbars/editor_navbar.html" %}
-            {% elif role == 'Editor in chief' %}
-                {% include "navbars/cheif_editor_navbar.html"%}
-            {% else %}
-                {% comment %} TODO {% endcomment %}
-            {% endif %} -->
-
         </div>
-
+        <!-- Arreglar i maquillar el boto següent: -->
+        <div class="nav-item w3-margin-top background-color:coral" align-top="right">
+            <button onclick="logout()">
+              Logout</button>
+        </div>
     </nav>
     {% endblock navbar %}
-    <div id="content" class="container" style="padding-top: 100px; padding-bottom: 100px">
-        {% block content %} Web content {% endblock content %}
-    </div>
     <div id="footer" class="footer bg-dark">
         {% block footer %}
         <div class="container text-white">
@@ -80,6 +70,11 @@
       swal("", '{{ msg }}','{{ type }}');
     </script>
     {% endif %}
+    <script>
+    function logout(){
+      window.location.href = "{% url 'logout' %}?next={% url 'login' %}"
+    }
+    </script>
 
 </body>
 
