@@ -33,7 +33,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-          {% include "navbars/artist_navbar.html" %}
+        {% if role == 'Organizer' %}
+          {% include "navbars/organizer_navbar.html" %}
+        {% endif %}
             <!-- {% if role == 'Editor' %}
                 {% include "navbars/editor_navbar.html" %}
             {% elif role == 'Editor in chief' %}
@@ -70,12 +72,15 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="{% static 'markdown/js/bootstrap-markdown.js' %}"></script>
-    {% endblock scripts %} {% block custom_scripts %} {% endblock custom_scripts %}
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    {% endblock scripts %}
     {% if msg %}
     <script>
       swal("", '{{ msg }}','{{ type }}');
     </script>
     {% endif %}
+
 </body>
 
 </html>

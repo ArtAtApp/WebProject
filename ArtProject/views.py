@@ -19,11 +19,23 @@ from models import *
 def homepage(request):
 
 	template = get_template("homepage.html")
+	member = get_member(request.user)
 	variables = {
-		"version": "1.0.0.01"
+		'role': member.role,
+		'name': member.first_name
 	}
 	output = template.render(variables)
 	return HttpResponse(output)
+
+def get_member(user):
+    if Customer.objects.filter(user=user).exists():
+        return Customer.objects.get(user=user)
+    elif Artist.objects.filter(user=user).exists():
+        return Artist.objects.get(user=user)
+    elif Organizer.objects.filter(user=user).exists():
+        return Organizer.objects.get(user=user)
+
+    return None
 
 #--------- User Login ---------
 def UserLogin(request):
@@ -32,7 +44,7 @@ def UserLogin(request):
 	elif request.method == "GET":
 		return render(request, "login.html", {
             'msg': request.GET.get('msg', None),
-            'type': request.GET.get('type', None)
+            'type': request.GET.get('type', None),
         })
 	elif request.method == "POST":
 		return Postlogin(request)
@@ -42,7 +54,6 @@ def Postlogin(request):
 	try:
 		user = authenticate(username=username, password=password)
 		login(request, user)
-
 		return HttpResponseRedirect(reverse("homepage"))
 	except:
 		return render(request, 'login.html', {
@@ -101,7 +112,7 @@ def createCustomer(request, role):
 	username, password, email, dni, firstname, lastname, phonenumber\
 	 = get_general_data(request)
 	try:
-		user = User.objects.create_user(username, password, email)
+		user = User.objects.create_user(username, email, password)
 		bank_account = request.POST.get('bank_account_signup', None)
 		role = request.POST.get('role', None)
 		customer = Customer(dni = dni, user = user, first_name = firstname,\
@@ -120,6 +131,7 @@ def createArtist(request, role):
 	username, password, email, dni, firstname, lastname, phonenumber\
 	 = get_general_data(request)
 	try:
+		user = User.objects.create_user(username, email, password)
 		bank_account = request.POST.get('bank_account_signup', None)
 		artist = Artist(dni = dni, user = user, first_name = firstname,\
 		 last_name = lastname, phone_number = phonenumber,\
@@ -137,6 +149,7 @@ def createOrganizer(request, role):
 	username, password, email, dni, firstname, lastname, phonenumber\
 	 = get_general_data(request)
 	try:
+		user = User.objects.create_user(username, email, password)
 		cif = request.POST.get('afiliation_CIF_signup', None)
  		organizer = Organizer(dni = dni, user = user, first_name = firstname,\
  		 last_name = lastname, phone_number = phonenumber,\
