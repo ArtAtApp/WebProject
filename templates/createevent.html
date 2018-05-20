@@ -1,0 +1,22 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+
+  <div class="w3-row-padding">
+    <div class="w3-col l6 s12 w3-margin-bottom">
+      <form class="login-form" action="/create/event" method="POST"> {% csrf_token %}
+        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Event Name</label>
+        <input type="text" id="name" name="name" placeholder="Event Name" required/>
+        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Initial Date</label>
+        <input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" required/>
+        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> End Date</label>
+        <input type="date" id="end_date" name="end_date" placeholder="End date" required/>
+        <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose events type</label>
+        <select id="type" name="type" required>
+        <option value="Painting" selected="Painting">Painting</option>
+        <option value="Sculpture">Sculpture</option>
+        <option value="Photography">Photography</option>
+        </select>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+  {% endblock content %}
