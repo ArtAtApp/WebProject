@@ -17,6 +17,7 @@ from models import *
 
 # Create your views here.
 
+#---------- Create events ----------
 @login_required(login_url='/accounts/login')
 def CreateEvent(request):
     if request.method == "GET":
@@ -47,3 +48,19 @@ def get_event_data(request):
 	type = request.POST.get('type', None)
 	organizer = get_member(request.user)
 	return name, ini_date, end_date, type, organizer
+
+
+#---------- Your events ----------
+@login_required(login_url='/accounts/login')
+def YourEvents(request):
+    if request.method == "GET":
+        user = get_member(request.user)
+        events = Event.objects.filter(created_by=user)
+        return render(request, "yourevents.html", {
+        'role': get_member(request.user).role,
+        'msg': request.GET.get('msg', None),
+        'type': request.GET.get('type', None),
+        'events': events
+        })
+    elif request.method == "POST":
+        return postCreateEvent(request)
