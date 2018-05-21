@@ -6,7 +6,7 @@
     <div class="w3-col l3 s12" style="background-color: #FFFFFF">
       <div class="w3-card w3-round-large w3-display-container" style="height: 250px; background-image: url('{% static 'img/paint.jpeg' %}')">
         <div class="w3-container w3-padding">
-          <button>Modify</button>
+          <button onclick="modifyEvent('{{ e.pk }}')">Modify</button>
           <button onclick="deleteEvent('{{ e.pk }}')">Delete</button>
         </div>
       </div>
@@ -36,5 +36,8 @@ function deleteEvent(id) {
                 }
             });
     }
+function modifyEvent(id){
+  window.location.href = "/modify/event/" + id
+}
 </script>
 {% endblock content %}

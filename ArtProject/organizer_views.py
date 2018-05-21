@@ -70,3 +70,26 @@ def delete_event(request, pk):
     event = get_object_or_404(Event, pk=pk)
     event.delete()
     return HttpResponseRedirect(request.GET.get("next", "/your/events"))
+
+# ---------- Modify events ----------
+@login_required(login_url='/accounts/login')
+def ModifyEvent(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == "GET":
+        return render(request, "modifyevents.html", {
+        'event': get_object_or_404(Event, pk=pk),
+        'role': get_member(request.user).role,
+        'msg': request.GET.get('msg', None),
+        'type': request.GET.get('type', None),
+        })
+    elif request.method == "POST":
+        return modify_data_event(request, event)
+
+def modify_data_event(request, event):
+	name, ini_date, end_date, type, organizer = get_event_data(request)
+	event.name = name
+	event.ini_date = ini_date
+	event.end_date = end_date
+	event.type = type
+	event.save()
+	return HttpResponseRedirect(reverse('yourevents'))
