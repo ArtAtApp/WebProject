@@ -1,23 +1,30 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
 
-.paddedblock {
-	padding-top: 1000px;
-}
-  <div class="w3-row-padding paddedblock">
+  <div class="form" style="margin-top: 150px" >
       <form class="login-form" action="/create/event" method="POST"> {% csrf_token %}
-        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Event Name</label>
-        <input type="text" id="name" name="name" placeholder="Event Name" required/>
-        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Initial Date</label>
-        <input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" required/>
-        <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> End Date</label>
-        <input type="date" id="end_date" name="end_date" placeholder="End date" required/>
-        <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose events type</label>
-        <select id="type" name="type" required>
-        <option value="Painting" selected="Painting">Painting</option>
-        <option value="Sculpture">Sculpture</option>
-        <option value="Photography">Photography</option>
-        </select>
-        <button type="submit">Create</button>
+				<div>
+        	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name</label>
+        	<input type="text" id="name" name="name" placeholder="Event Name" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date</label>
+        	<input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date</label>
+        	<input type="date" id="end_date" name="end_date" placeholder="End date" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose events type</label>
+	        <select id="type" name="type" required>
+	        <option value="Painting" selected="Painting">Painting</option>
+	        <option value="Sculpture">Sculpture</option>
+	        <option value="Photography">Photography</option>
+	        </select>
+				</div>
+				<div>
+        	<button style="margin-top: 50px" type="submit">Create</button>
+				</div>
       </form>
   </div>
   {% endblock content %}

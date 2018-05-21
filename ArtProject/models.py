@@ -6,6 +6,7 @@ from django import forms
 from django.contrib.auth.models import User
 from datetime import date
 from django.core.validators import RegexValidator
+from PIL import Image
 
 # Create your models here.
 
@@ -52,6 +53,7 @@ class Artwork(models.Model):
 	art_type = models.CharField(max_length=30)
 	date = models.DateTimeField(default=date.today)
 	price = models.IntegerField()
+	image = models.ImageField(upload_to="graphic_resources")
 	STATES = (
 		(1, 'Available'),
 		(2, 'Displayed'),
