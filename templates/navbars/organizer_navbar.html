@@ -1,7 +1,11 @@
 {% load staticfiles %}
 
 <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+  {% if request.path == '' %}
+    <li class="nav-item active">
+  {% else %}
+    <li class="nav-item">
+  {% endif %}
         <a class="nav-link w3-margin-left">
             <i class="fa fa-home"></i> Current events
             <span class="sr-only">(current)</span>
@@ -16,7 +20,7 @@
       <a class="nav-link" href="/create/event">Create an event</a>
     </li>
     <li class="nav-item w3-margin-left">
-      {% if request.path == '/create/event' %}
+      {% if request.path == '/your/events' %}
         <li class="nav-item active">
       {% else %}
         <li class="nav-item">

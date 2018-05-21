@@ -64,3 +64,9 @@ def YourEvents(request):
         })
     elif request.method == "POST":
         return postCreateEvent(request)
+
+@login_required(login_url='/accounts/login')
+def delete_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    event.delete()
+    return HttpResponseRedirect(request.GET.get("next", "/your/events"))

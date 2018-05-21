@@ -19,7 +19,7 @@ from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
 from ArtProject.views import UserLogin, homepage, UserSignUp
-from ArtProject.organizer_views import CreateEvent, YourEvents
+from ArtProject.organizer_views import CreateEvent, YourEvents, delete_event
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^accounts/logout$', logout, name="logout"),
     url(r'^accounts/signup$', UserSignUp, name="singup"),
     url(r'^create/event$', CreateEvent, name="createevent"),
-    url(r'^your/events$', YourEvents, name="yourevents")
+    url(r'^your/events$', YourEvents, name="yourevents"),
+    url(r'^delete/event/(?P<pk>\d+)', delete_event, name='deleteevent'),
 ]
