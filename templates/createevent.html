@@ -1,7 +1,9 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
 
-  <div class="w3-row-padding">
-    <div class="w3-col l6 s12 w3-margin-bottom">
+.paddedblock {
+	padding-top: 1000px;
+}
+  <div class="w3-row-padding paddedblock">
       <form class="login-form" action="/create/event" method="POST"> {% csrf_token %}
         <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Event Name</label>
         <input type="text" id="name" name="name" placeholder="Event Name" required/>
@@ -17,6 +19,5 @@
         </select>
         <button type="submit">Create</button>
       </form>
-    </div>
   </div>
   {% endblock content %}
