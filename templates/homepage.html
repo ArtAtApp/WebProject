@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
         crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock stylesheets %}
 </head>
 
@@ -43,6 +44,8 @@
         </div>
     </nav>
     {% endblock navbar %}
+    {% block content %}
+    {% endblock content %}
     <div id="footer" class="footer bg-dark">
         {% block footer %}
         <div class="container text-white">
