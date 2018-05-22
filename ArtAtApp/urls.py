@@ -19,6 +19,7 @@ from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
 from ArtProject.views import UserLogin, homepage, UserSignUp
+from ArtProject.artist_views import create_artwork
 from ArtProject.organizer_views import CreateEvent, YourEvents, delete_event, ModifyEvent
 
 urlpatterns = [
@@ -27,8 +28,11 @@ urlpatterns = [
     url(r'^accounts/login$', UserLogin, name="login"),
     url(r'^accounts/logout$', logout, name="logout"),
     url(r'^accounts/signup$', UserSignUp, name="singup"),
+    #TODO:
+    url(r'^create/artwork$', create_artwork, name="create_artwork"),
     url(r'^create/event$', CreateEvent, name="createevent"),
     url(r'^your/events$', YourEvents, name="yourevents"),
     url(r'^delete/event/(?P<pk>\d+)', delete_event, name='deleteevent'),
     url(r'^modify/event/(?P<pk>\d+)', ModifyEvent, name='modifyevent')
+
 ]

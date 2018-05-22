@@ -22,7 +22,7 @@ def homepage(request):
 	member = get_member(request.user)
 	variables = {
 		'role': member.role,
-		'name': member.first_name
+		'name': member.first_name,
 	}
 	output = template.render(variables)
 	return HttpResponse(output)

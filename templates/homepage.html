@@ -20,6 +20,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {% endblock stylesheets %}
 </head>
 
@@ -32,7 +33,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
         {% if role == 'Organizer' %}
-          {% include "navbars/organizer_navbar.html" %}
+            {% include "navbars/organizer_navbar.html" %}
+        {% elif role == 'Artist' %}
+            {% include "navbars/artist_navbar.html" %}
         {% endif %}
         </div>
         <!-- Arreglar i maquillar el boto següent: -->
