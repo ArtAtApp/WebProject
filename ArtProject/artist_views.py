@@ -32,16 +32,17 @@ def get_artwork(request):
 	name = request.POST.get('artwork_name', None)
 	art_type = request.POST.get('artwork_type', None)
 	price = request.POST.get('artwork_price', None)
+	uploaded_file = request.POST.get('file', None)
 
-	return artist, name, art_type, price
+	return artist, name, art_type, price, uploaded_file
 
 def post_artwork(request):
 
-	artist, name, art_type, price = get_artwork(request)
+	artist, name, art_type, price, uploaded_file = get_artwork(request)
 
 	# try:
 	artwork = Artwork(artist=artist, name=name, art_type=art_type,
-	price=price, state=1, image=None)
+	price=price, state=1, image=uploaded_file)
 	artwork.save()
 
 	return HttpResponseRedirect(reverse('homepage'))

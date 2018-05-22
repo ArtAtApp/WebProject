@@ -7,6 +7,10 @@
         <label class="w3-leftUser already exists w3-text-gray w3-margin-bottom" for="name">Artwork name</label>
         <input type="text" id="name" name="artwork_name" placeholder="name" required/>
 
+        <br>
+          <input type="file" onchange="previewFile()"><br>
+          <img src="" name="file" height="150" alt="Image preview...">
+        </br>
         <div>
             <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your artwork type</label>
             <br>
@@ -28,6 +32,25 @@
       </form>
     </div>
   </div>
+  <script>
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+
+  previewFile();  //calls the function named previewFile()
+  </script>
   {% if errors %}
   <script>
     swal("", '{{ errors }}',"error");
