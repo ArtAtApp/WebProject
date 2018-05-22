@@ -1,19 +1,10 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
 
-<head>
-  <meta charset="UTF-8">
-  <title>Flat HTML5/CSS3 Create artwork</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</head>
-<body>
   <div class="login-page">
     <div class="form">
-      <form class="login-form" action="/create_artwork" method="POST"> {% csrf_token %}
+      <form class="login-form" action="/create/artwork" method="POST"> {% csrf_token %}
 
-        <label class="w3-left w3-text-gray w3-margin-bottom" for="name">Artwork name</label>
+        <label class="w3-leftUser already exists w3-text-gray w3-margin-bottom" for="name">Artwork name</label>
         <input type="text" id="name" name="artwork_name" placeholder="name" required/>
 
         <div>
@@ -47,5 +38,4 @@
     swal("", '{{ msg }}','{{ type }}');
   </script>
   {% endif %}
-</body>
-</html>
+{% endblock %}

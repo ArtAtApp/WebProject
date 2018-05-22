@@ -28,8 +28,8 @@ urlpatterns = [
     url(r'^accounts/login$', UserLogin, name="login"),
     url(r'^accounts/logout$', logout, name="logout"),
     url(r'^accounts/signup$', UserSignUp, name="singup"),
-    #TODO: 
-    url(r'^create_artwork$', create_artwork, name="create_artwork"),
+    #TODO:
+    url(r'^create/artwork$', create_artwork, name="create_artwork"),
     url(r'^create/event$', CreateEvent, name="createevent"),
     url(r'^your/events$', YourEvents, name="yourevents"),
     url(r'^delete/event/(?P<pk>\d+)', delete_event, name='deleteevent'),
