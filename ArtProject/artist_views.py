@@ -43,21 +43,16 @@ def get_artwork(request):
 
 def post_artwork(request):
 
-	artist, name, art_type, price, image = get_artwork(request)
-	artwork = Artwork(artist=artist, name=name, art_type=art_type,
-	price=price, image=image)
-	artwork.save()
-	# form = ArtworkForm(request.POST, request.FILES)
-	# if form.is_valid():
-	# 	form.save()
-
-	return HttpResponseRedirect(reverse('homepage'))
-
-	# except:
-	#
-	# 	return render(request, "create_artwork.html", {
-    #         'errors': 'Error creating artwork'
-    #     })
+	try:
+		artist, name, art_type, price, image = get_artwork(request)
+		artwork = Artwork(artist=artist, name=name, art_type=art_type,
+		price=price, image=image)
+		artwork.save()
+		return HttpResponseRedirect(reverse('homepage'))
+ 	except:
+		return render(request, "create_artwork.html", {
+            'errors': 'Error creating artwork'
+        })
 
 # ---------- Your Artworks ----------
 @login_required(login_url='/accounts/login')
@@ -84,18 +79,21 @@ def ModifyArtworks(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
     if request.method == "GET":
         return render(request, "modifyartworks.html", {
+        'form': ArtworkForm(),
         'event': artwork,
         'role': get_member(request.user).role,
         'msg': request.GET.get('msg', None),
         'type': request.GET.get('type', None),
         })
+    elif request.method == "POST":
+        return modify_data_artwork(request, artwork)
 
 
-def modify_data_event(request, event):
-	name, ini_date, end_date, type, organizer = get_event_data(request)
-	event.name = name
-	event.ini_date = ini_date
-	event.end_date = end_date
-	event.type = type
-	event.save()
-	return HttpResponseRedirect(reverse('yourevents'))
+def modify_data_artwork(request, artwork):
+	artist, name, art_type, price, image = get_artwork(request)
+	artwork.name = name
+	artwork.art_type = art_type
+	artwork.price = price
+	artwork.image = image
+	artwork.save()
+	return HttpResponseRedirect(reverse('yourartworks'))
