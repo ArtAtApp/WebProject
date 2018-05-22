@@ -114,7 +114,6 @@ def createCustomer(request, role):
 	try:
 		user = User.objects.create_user(username, email, password)
 		bank_account = request.POST.get('bank_account_signup', None)
-		role = request.POST.get('role', None)
 		customer = Customer(dni = dni, user = user, first_name = firstname,\
 		last_name = lastname, phone_number = phonenumber,\
 		role = role, bank_account = bank_account)
