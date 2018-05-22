@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['afternoon-hamlet-15993.herokuapp.com', '127.0.0.1']
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -115,7 +116,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,0 +1,49 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+
+<div class="w3-row-padding">
+
+  <!-- <div class="form" style="margin-top: 150px" >
+      <form class="login-form">
+				<div>
+        	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name: {{event.name}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date: {{event.ini_date}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date: {{event.end_date}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Type: {{event.type}}</label>
+				</div>
+      </form>
+  </div> -->
+  <div class="form" style="margin-top: 150px" >
+      <form class="login-form" method="POST"> {% csrf_token %}
+				<div>
+        	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name</label>
+        	<input type="text" id="name" name="name" placeholder="Event Name" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date</label>
+        	<input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date</label>
+        	<input type="date" id="end_date" name="end_date" placeholder="End date" required/>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Choose events type</label>
+	        <select id="type" name="type" required>
+	        <option value="Painting" selected="Painting">Painting</option>
+	        <option value="Sculpture">Sculpture</option>
+	        <option value="Photography">Photography</option>
+	        </select>
+				</div>
+				<div>
+        	<button style="margin-top: 50px" type="submit">Modify</button>
+				</div>
+      </form>
+  </div>
+</div>
+  {% endblock content %}

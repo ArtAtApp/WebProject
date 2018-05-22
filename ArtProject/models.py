@@ -52,6 +52,7 @@ class Artwork(models.Model):
 	art_type = models.CharField(max_length=30)
 	date = models.DateTimeField(default=date.today)
 	price = models.IntegerField()
+	image = models.ImageField(upload_to="artworks")
 	STATES = (
 		(1, 'Available'),
 		(2, 'Displayed'),
@@ -61,7 +62,14 @@ class Artwork(models.Model):
 
 class Event(models.Model):
 	event_id = models.AutoField(primary_key=True)
+	name = models.CharField(blank=False, null=False, max_length=50)
 	created_by = models.ForeignKey(Organizer, on_delete = models.CASCADE)
 	ini_date = models.DateTimeField()
 	end_date = models.DateTimeField()
 	artwork = models.ManyToManyField(Artwork, blank=True)
+	Types = (
+		('Painting', 'Painting'),
+		('Sculpture', 'Sculpture'),
+		('Photography', 'Photography'),
+	)
+	type = models.CharField('Type', blank=True, null=True, choices=Types, max_length=25)
