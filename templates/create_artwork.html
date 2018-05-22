@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flat HTML5/CSS3 Create artwork</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+  <div class="login-page">
+    <div class="form">
+      <form class="login-form" action="/create_artwork" method="POST"> {% csrf_token %}
+
+        <label class="w3-left w3-text-gray w3-margin-bottom" for="name">Artwork name</label>
+        <input type="text" id="name" name="artwork_name" placeholder="name" required/>
+
+        <div>
+            <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your artwork type</label>
+            <br>
+            <br>
+            <select id="artwork_type" name="artwork_type" required>
+                <option value="Painting" selected="Painting" onclick="painting()">Painting</option>
+                <option value="Photography" onclick="painting()">Photography</option>
+                <option value="Sculpture" onclick="painting()">Sculpture</option>
+            </select>
+            <br>
+            <br>
+        </div>
+
+        <label class="w3-left w3-text-gray w3-margin-bottom" for="name">Sell price (in euros)</label>
+        <input type="price" id="price" name="artwork_price" placeholder="price"/>
+
+        <button type="submit">create</button>
+
+      </form>
+    </div>
+  </div>
+  {% if errors %}
+  <script>
+    swal("", '{{ errors }}',"error");
+  </script>
+  {% endif %}
+  {% if msg %}
+  <script>
+    swal("", '{{ msg }}','{{ type }}');
+  </script>
+  {% endif %}
+</body>
+</html>
