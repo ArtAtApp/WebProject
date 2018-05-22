@@ -58,7 +58,7 @@ class Artwork(models.Model):
 		(2, 'Displayed'),
 		(3, 'Sold')
 	)
-	state = models.PositiveIntegerField(null=True, blank=True, choices=STATES)
+	state = models.PositiveIntegerField(default=1, choices=STATES)
 
 class Event(models.Model):
 	event_id = models.AutoField(primary_key=True)

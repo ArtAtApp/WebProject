@@ -1,0 +1,46 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+
+<div class="w3-row-padding">
+  {% for e in artworks %}
+    <div style="margin-top: 150px"><h1 class="w3-xxlarge w3-hover-text-teal">{{ e.name }}</h1></div>
+    <div class="w3-col l3 s12" style="background-color: #FFFFFF">
+      <div class="w3-card w3-round-large w3-display-container" style="height: 250px">
+        <div class="w3-container w3-padding">
+          <button onclick="modifyEvent('{{ e.pk }}')">Modify</button>
+          <button onclick="deleteEvent('{{ e.pk }}')">Delete</button>
+          <div>
+            {{e.image}}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% empty %}
+<div class="w3-container w3-center">
+    <h4 class="w3-text-gray">No events yet.</h4>
+</div>
+{% endfor %}
+</div>
+<script>
+function deleteEvent(id) {
+        swal({
+                title: "Are you sure?",
+                text: "Do you want to delete the artwork? ",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then(function (willDelete) {
+                if (willDelete) {
+                    swal("OK!", "Artwork was succesfully deleted", "success").then(function () {
+                        window.location.href = "/delete/artwork/" + id + "?next=" + window.location.pathname;
+                    });
+                } else {
+                }
+            });
+    }
+function modifyEvent(id){
+  window.location.href = "/modify/artwork/" + id
+}
+</script>
+{% endblock content %}

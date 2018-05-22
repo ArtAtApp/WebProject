@@ -62,8 +62,6 @@ def YourEvents(request):
         'type': request.GET.get('type', None),
         'events': events
         })
-    elif request.method == "POST":
-        return postCreateEvent(request)
 
 @login_required(login_url='/accounts/login')
 def delete_event(request, pk):
