@@ -1,0 +1,41 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+
+<div class="login-page">
+  <div class="form">
+
+  <!-- <div class="form" style="margin-top: 150px" >
+      <form class="login-form">
+				<div>
+        	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name: {{event.name}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date: {{event.ini_date}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date: {{event.end_date}}</label>
+				</div>
+				<div>
+					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Type: {{event.type}}</label>
+				</div>
+      </form>
+  </div> -->
+  <form class="login-form" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+  {{form.as_p}}
+
+  <div>
+    <label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Choose events type</label>
+    <select id="type" name="artwork_type" required>
+    <option value="Painting" selected="Painting">Painting</option>
+    <option value="Sculpture">Sculpture</option>
+    <option value="Photography">Photography</option>
+    </select>
+  </div>
+
+    <button type="submit">Modify</button>
+
+  </form>
+  </div>
+</div>
+</div>
+  {% endblock content %}

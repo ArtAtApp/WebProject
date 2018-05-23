@@ -19,7 +19,8 @@ from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
 from ArtProject.views import UserLogin, homepage, UserSignUp
-from ArtProject.artist_views import create_artwork
+from ArtProject.artist_views import *
+from django.views.static import serve
 from ArtProject.organizer_views import CreateEvent, YourEvents, delete_event, ModifyEvent
 
 urlpatterns = [
@@ -33,6 +34,14 @@ urlpatterns = [
     url(r'^create/event$', CreateEvent, name="createevent"),
     url(r'^your/events$', YourEvents, name="yourevents"),
     url(r'^delete/event/(?P<pk>\d+)', delete_event, name='deleteevent'),
-    url(r'^modify/event/(?P<pk>\d+)', ModifyEvent, name='modifyevent')
+    url(r'^modify/event/(?P<pk>\d+)', ModifyEvent, name='modifyevent'),
+    url(r'^your/artworks$', YourArtworks, name="yourartworks"),
+    url(r'^delete/artwork/(?P<pk>\d+)', delete_artwork, name='deleteartworks'),
+    url(r'^modify/artwork/(?P<pk>\d+)', ModifyArtworks, name='modifyartworks'),
 
+]
+
+# For displaying images
+urlpatterns += [
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, })
 ]

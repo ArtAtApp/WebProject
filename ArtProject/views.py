@@ -14,6 +14,11 @@ from django.contrib.auth.models import User
 from models import *
 # Create your views here.
 
+# Security Mixins
+
+
+
+
 #--------- Homepage ---------
 @login_required(login_url='/accounts/login')
 def homepage(request):
