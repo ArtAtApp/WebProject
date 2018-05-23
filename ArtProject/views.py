@@ -12,25 +12,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from models import *
+from django.http import JsonResponse
+import datetime
 # Create your views here.
-
-# Security Mixins
-
-
-
 
 #--------- Homepage ---------
 @login_required(login_url='/accounts/login')
 def homepage(request):
-
-	template = get_template("homepage.html")
-	member = get_member(request.user)
-	variables = {
-		'role': member.role,
-		'name': member.first_name,
-	}
-	output = template.render(variables)
-	return HttpResponse(output)
+	return HttpResponseRedirect(reverse("currentevents"))
 
 def get_member(user):
     if Customer.objects.filter(user=user).exists():
@@ -42,10 +31,35 @@ def get_member(user):
 
     return None
 
+# ---------- Current Events ----------
+
+def CurrentEvents(request):
+	events = get_events_in_date(request)
+	if request.method == "GET":
+		return render(request, "currentevents.html", {
+			'role': get_member(request.user).role,
+			'msg': request.GET.get('msg', None),
+			'type': request.GET.get('type', None),
+			'events': events
+		})
+
+def get_events_in_date(request):
+	events = []
+	all_events = Event.objects.all()
+	for e in all_events:
+		ini_date = e.ini_date
+		end_date = e.end_date
+		now = datetime.datetime.now()
+		if now >= ini_date and now <= end_date:
+			events.append(e)
+	print(events)
+	print("\n\n\n\n")
+	return events
+
 #--------- User Login ---------
 def UserLogin(request):
 	if request.user.is_authenticated():
-		return HttpResponseRedirect(reverse("homepage"))
+		return HttpResponseRedirect(reverse("currentevents"))
 	elif request.method == "GET":
 		return render(request, "login.html", {
             'msg': request.GET.get('msg', None),
@@ -59,7 +73,7 @@ def Postlogin(request):
 	try:
 		user = authenticate(username=username, password=password)
 		login(request, user)
-		return HttpResponseRedirect(reverse("homepage"))
+		return HttpResponseRedirect(reverse("currentevents"))
 	except:
 		return render(request, 'login.html', {
 			'errors': 'Incorrect credentials'
@@ -83,7 +97,7 @@ def get_member(user):
 #---------- User signup ----------
 def UserSignUp(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse("homepage"))
+        return HttpResponseRedirect(reverse("currentevents"))
     elif request.method == "GET":
         return render(request, "signup.html", {
             'msg': request.GET.get('msg', None),
@@ -125,7 +139,7 @@ def createCustomer(request, role):
 		customer.save()
 		user.save()
 		login(request, user)
-		return HttpResponseRedirect(reverse('homepage'))
+		return HttpResponseRedirect(reverse('currentevents'))
 	except:
 		return render(request, "signup.html", {
             'errors': 'User already exists'
@@ -143,7 +157,7 @@ def createArtist(request, role):
 		artist.save()
 		user.save()
 		login(request, user)
-		return HttpResponseRedirect(reverse('homepage'))
+		return HttpResponseRedirect(reverse('currentevents'))
 	except:
 		return render(request, "signup.html", {
             'errors': 'User already exists'
@@ -161,8 +175,16 @@ def createOrganizer(request, role):
  		organizer.save()
  		user.save()
  		login(request, user)
- 		return HttpResponseRedirect(reverse('homepage'))
+ 		return HttpResponseRedirect(reverse('currentevents'))
 	except:
 		return render(request, "signup.html", {
             'errors': 'User already exists'
         })
+
+
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)
