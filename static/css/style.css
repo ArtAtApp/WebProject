@@ -161,5 +161,9 @@ body {
   text-decoration: none;
 }
 
+.addArtworkBttn{
+  width: 140px;
+}
+
 .errorMessage{
   color: #cc0000;
