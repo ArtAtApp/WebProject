@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
 from django.contrib.auth.views import logout
-from ArtProject.views import UserLogin, homepage, UserSignUp
+from ArtProject.views import UserLogin, homepage, UserSignUp, CurrentEvents
 from ArtProject.artist_views import *
 from django.views.static import serve
 from ArtProject.views import validate_username
@@ -29,8 +29,7 @@ urlpatterns = [
     url(r'^$', homepage, name = 'homepage'),
     url(r'^accounts/login$', UserLogin, name="login"),
     url(r'^accounts/logout$', logout, name="logout"),
-    url(r'^accounts/signup$', UserSignUp, name="singup"),
-    #TODO:
+    url(r'^accounts/signup$', UserSignUp, name="signup"),
     url(r'^create/artwork$', create_artwork, name="create_artwork"),
     url(r'^create/event$', CreateEvent, name="createevent"),
     url(r'^your/events$', YourEvents, name="yourevents"),
@@ -40,6 +39,7 @@ urlpatterns = [
     url(r'^delete/artwork/(?P<pk>\d+)', delete_artwork, name='deleteartworks'),
     url(r'^modify/artwork/(?P<pk>\d+)', ModifyArtworks, name='modifyartworks'),
     url(r'^ajax/validate_username/$', validate_username, name='validate_username'),
+    url(r'^current/events/$', CurrentEvents, name='currentevents')
 
 ]
 
