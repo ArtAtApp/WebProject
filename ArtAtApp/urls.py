@@ -21,6 +21,7 @@ from django.contrib.auth.views import logout
 from ArtProject.views import UserLogin, homepage, UserSignUp
 from ArtProject.artist_views import *
 from django.views.static import serve
+from ArtProject.views import validate_username
 from ArtProject.organizer_views import CreateEvent, YourEvents, delete_event, ModifyEvent
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     url(r'^your/artworks$', YourArtworks, name="yourartworks"),
     url(r'^delete/artwork/(?P<pk>\d+)', delete_artwork, name='deleteartworks'),
     url(r'^modify/artwork/(?P<pk>\d+)', ModifyArtworks, name='modifyartworks'),
+    url(r'^ajax/validate_username/$', validate_username, name='validate_username'),
 
 ]
 

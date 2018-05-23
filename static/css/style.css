@@ -22,7 +22,7 @@
   background: #f2f2f2;
   width: 100%;
   border: 0;
-  margin: 0 0 15px;
+  margin: 0 0 0px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
@@ -105,4 +105,8 @@ body {
   margin-top: 100px;
   color: #8B0000;
   font-size: 20px;
+}
+
+.errorMessage{
+  color: #cc0000;
 }

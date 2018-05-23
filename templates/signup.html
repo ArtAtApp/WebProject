@@ -7,11 +7,48 @@
   <title>Sign Up</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+
+  {% block javascript %}
+  <script>
+    $(document).ready(function(){
+      $("#id_username").change(function () {
+        var username = $(this).val();
+        console.log( $(this).val() );
+        $.ajax({
+          url: '/ajax/validate_username/',
+          data: {
+            'username': username
+          },
+          dataType: 'json',
+          success: function (data) {
+            if (data.is_taken) {
+              $("#takenUser").html("User already taken");
+            }
+            else{
+              $("#takenUser").html("");
+            }
+
+          }
+        });
+
+      });
+    });
+  </script>
+  {% endblock %}
+
+
 </head>
 <body>
+  <!-- Login form -->
   <div class="login-page">
     <div class="form">
       <form class="login-form" action="/accounts/signup" method="POST"> {% csrf_token %}
+
         <div>
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Choose your role</label>
         <br>
@@ -22,24 +59,32 @@
         </select>
         <br>
         </div>
-        <!-- Login form -->
+        </br>
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="username" name="usernamesignup" placeholder="username" required/>
+        <input type="text" id="id_username" name="usernamesignup" placeholder="username" required/>
+        <label class="w3-left w3-text-gray w3-margin-bottom errorMessage"  id="takenUser"></label></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Password</label>
-        <input type="password" id="password" name="passwordsignup" placeholder="password" required/>
+        <input type="password" id="password" name="passwordsignup" placeholder="password" required/></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> e-mail</label>
-        <input type="email" id="email" name="emailsignup" placeholder="email" required/>
+        <input type="email" id="email" name="emailsignup" placeholder="email" required/></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> DNI</label>
-        <input type="text" id="dni" name="dnisignup" placeholder="dni" required/>
+        <input type="text" id="dni" name="dnisignup" placeholder="dni" required/></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> First name</label>
-        <input type="text" id="firstname" name="firstnamesignup" placeholder="firstname" required/>
+        <input type="text" id="firstname" name="firstnamesignup" placeholder="firstname" required/></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Last name</label>
-        <input type="text" id="lastname" name="lastnamesignup" placeholder="lastname" required/>
+        <input type="text" id="lastname" name="lastnamesignup" placeholder="lastname" required/></br></br>
+
         <label class="w3-left w3-text-gray w3-margin-bottom" for="user"><i class="fa fa-user"></i> Phone number</label>
-        <input type="text" id="phonenumber" name="phonenumbersignup" placeholder="phonenumber" required/>
+        <input type="text" id="phonenumber" name="phonenumbersignup" placeholder="phonenumber" required/></br></br>
+
         <div id="customer" style="display: block;">
           <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Bank account</label>
-          <input type="text" id="bank_account" name="bank_account_signup" placeholder="Bank account" required/>
+          <input type="text" id="bank_account" name="bank_account_signup" placeholder="Bank account" required/></br></br>
         </div>
         <div id="organizer" style="display: none;">
           <label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top" for="pass"><i class="fa fa-key"></i> Enterprise CIF</label>
