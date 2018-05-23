@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from models import *
+from django.http import JsonResponse
 # Create your views here.
 
 # Security Mixins
@@ -166,3 +167,11 @@ def createOrganizer(request, role):
 		return render(request, "signup.html", {
             'errors': 'User already exists'
         })
+
+
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)
