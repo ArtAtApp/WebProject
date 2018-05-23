@@ -9,7 +9,6 @@
     <title>
         {% block title %} Homepage {% endblock title %}
     </title>
-    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" />
     <!-- Linking the stylesheets -->
     {% block stylesheets %}
     <!-- <link rel="stylesheet" href="{% static 'markdown/css/bootstrap-markdown.min.css' %}"> -->
@@ -40,7 +39,7 @@
         </div>
         <!-- Arreglar i maquillar el boto següent: -->
         <div class="nav-item w3-margin-top background-color:coral" align-top="right">
-            <button onclick="logout()">
+            <button class="w3-button w3-round-xlarge w3-teal" onclick="logout()">
               Logout</button>
         </div>
     </nav>
@@ -70,7 +69,7 @@
     <script src="{% static 'markdown/js/bootstrap-markdown.js' %}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-    
+
     {% endblock scripts %}
     {% if msg %}
     <script>

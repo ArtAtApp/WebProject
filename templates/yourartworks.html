@@ -1,15 +1,16 @@
-{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+{% extends "homepage.html" %}{% load staticfiles %} {% block content %}
 
 <div class="w3-row-padding">
   {% for e in artworks %}
+  <link rel="stylesheet" href="/media/{{e.image}}">
     <div style="margin-top: 150px"><h1 class="w3-xxlarge w3-hover-text-teal">{{ e.name }}</h1></div>
-    <div class="w3-col l3 s12" style="background-color: #FFFFFF">
+    <div class="w3-col l2 s12" style="background-image: url(/media/{{e.image}}) ">
       <div class="w3-card w3-round-large w3-display-container" style="height: 250px">
         <div class="w3-container w3-padding">
-          <button onclick="modifyEvent('{{ e.pk }}')">Modify</button>
-          <button onclick="deleteEvent('{{ e.pk }}')">Delete</button>
+          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="modifyEvent('{{ e.pk }}')">Modify</button>
+          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="deleteEvent('{{ e.pk }}')">Delete</button>
           <div>
-             <img src="{{e.image}}" alt="" height="100" width="100">
+             <!-- <img src="/media/{{e.image}}" alt="" height="100" width="100"> -->
           </div>
         </div>
       </div>
@@ -17,7 +18,7 @@
 </div>
 {% empty %}
 <div class="w3-container w3-center">
-    <h4 class="w3-text-gray">No events yet.</h4>
+    <h1 class="w3-text-gray">No events yet.</h1>
 </div>
 {% endfor %}
 </div>
