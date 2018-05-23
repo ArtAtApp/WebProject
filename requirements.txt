@@ -6,4 +6,3 @@ whitenoise
 docker-py==1.8.1
 behave==1.2.6
 pillow==5.1.0
-django-braces
