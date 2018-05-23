@@ -35,7 +35,7 @@ def postCreateEvent(request):
 		event = Event(name = name, created_by = organizer, ini_date = ini_date,\
 		end_date = end_date, type = type)
 		event.save()
-		return HttpResponseRedirect(reverse('homepage'))
+		return HttpResponseRedirect(reverse('currentevents'))
 	except:
 		return render(request, "createevent.html", {
             'errors': 'Error creating the event'

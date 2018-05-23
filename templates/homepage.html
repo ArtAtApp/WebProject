@@ -36,6 +36,8 @@
             {% include "navbars/organizer_navbar.html" %}
         {% elif role == 'Artist' %}
             {% include "navbars/artist_navbar.html" %}
+        {% elif role == 'Customer' %}
+            {% include "navbars/customer_navbar.html" %}
         {% endif %}
         </div>
         <!-- Arreglar i maquillar el boto següent: -->
@@ -70,7 +72,7 @@
     <script src="{% static 'markdown/js/bootstrap-markdown.js' %}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-    
+
     {% endblock scripts %}
     {% if msg %}
     <script>

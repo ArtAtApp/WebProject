@@ -48,7 +48,7 @@ def post_artwork(request):
 		artwork = Artwork(artist=artist, name=name, art_type=art_type,
 		price=price, image=image)
 		artwork.save()
-		return HttpResponseRedirect(reverse('homepage'))
+		return HttpResponseRedirect(reverse('currentevents'))
  	except:
 		return render(request, "create_artwork.html", {
             'errors': 'Error creating artwork'
