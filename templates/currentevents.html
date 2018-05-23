@@ -1,17 +1,22 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
-
-<div class="w3-row-padding">
+<div class="menuSeparator"></div>
   {% for e in events %}
-    <div style="margin-top: 150px"><h1 class="w3-xxlarge w3-hover-text-teal">{{ e.name }}</h1></div>
-    <div class="w3-col l3 s12" style="background-color: #FFFFFF">
-      <div class="w3-card w3-round-large w3-display-container" style="height: 250px">
+    <div class="eventWrapper">
+    <div>{{ e.name }}</div>
+      <div class="w3-col l3 s12">
+        <div class="w3-card w3-round-large w3-display-container eventBody" style="background-image: url('{% static 'img/images.jpeg' %}')">
+          <div class="w3-container w3-padding">
+            <div class="bttn" >Enter</div>
+            {% if role == "Artist" %}
+            <div class="bttn addArtworkBttn" >Add Artwork</div>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
-</div>
 {% empty %}
 <div class="w3-container w3-center">
     <h4 class="w3-text-gray">No events yet.</h4>
 </div>
 {% endfor %}
-</div>
 {% endblock content %}

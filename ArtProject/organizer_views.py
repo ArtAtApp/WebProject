@@ -38,7 +38,8 @@ def postCreateEvent(request):
 		return HttpResponseRedirect(reverse('currentevents'))
 	except:
 		return render(request, "createevent.html", {
-            'errors': 'Error creating the event'
+            'errors': 'Error creating the event',
+            'role': get_member(request.user).role
         })
 
 def get_event_data(request):

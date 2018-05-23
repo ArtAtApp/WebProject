@@ -1,23 +1,33 @@
-{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+{% extends "homepage.html" %}{% load staticfiles %} {% block content %}
 
-<div class="w3-row-padding">
+<div class="w3-row-padding" style="align: center">
   {% for e in artworks %}
-    <div style="margin-top: 150px"><h1 class="w3-xxlarge w3-hover-text-teal">{{ e.name }}</h1></div>
-    <div class="w3-col l3 s12" style="background-color: #FFFFFF">
-      <div class="w3-card w3-round-large w3-display-container" style="height: 250px">
+  <link rel="stylesheet" href="/media/{{e.image}}">
+  <div  style="height: 600px; width:600px; margin: 0 auto; ">
+    <div class="w3-card w3-round-large" style="margin-top: 150px; background-color: #eafcf3"><h1 class="w3-xxlarge w3-hover-text-teal" style="text-align:center">{{ e.name }}</h1></div>
+    <div class="w3-col l2 s12" style=" height: 600px; width:600px ">
+      <div class="w3-card w3-round-large w3-display-container" >
         <div class="w3-container w3-padding">
-          <button onclick="modifyEvent('{{ e.pk }}')">Modify</button>
-          <button onclick="deleteEvent('{{ e.pk }}')">Delete</button>
-          <div>
-             <img src="{{e.image}}" alt="" height="100" width="100">
-          </div>
+          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="modifyEvent('{{ e.pk }}')" style="float:left;">Modify</button>
+          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="deleteEvent('{{ e.pk }}')" style="float:right;">Delete</button>
+        </div>
+        <div  style="background-color: #eafcf3;  margin: 0 auto" >
+
+          <label style="font-size: 20px; padding-left:10px;"> Art type : {{e.art_type}}</label></br>
+          <label style="font-size: 20px; padding-left:10px;"> Date of creation : {{e.date}}</label></br>
+          <label style="font-size: 20px; padding-left:10px;"> Price : {{e.price}} €</label></br>
+          <label style="font-size: 20px; padding-left:10px;"> State : {{e.state}} </label></br>
+          <img src="/media/{{e.image}}" alt="Bla" style="height: 296px;  width:600px;"></img>
+
         </div>
       </div>
+
     </div>
+  </div>
 </div>
 {% empty %}
 <div class="w3-container w3-center">
-    <h4 class="w3-text-gray">No events yet.</h4>
+    <h1 class="w3-text-gray">No events yet.</h1>
 </div>
 {% endfor %}
 </div>
