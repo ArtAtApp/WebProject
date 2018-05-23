@@ -73,14 +73,15 @@ def delete_artwork(request, pk):
     artwork.delete()
     return HttpResponseRedirect(request.GET.get("next", "/your/artworks"))
 
-# ---------- Modify events ----------
+# ---------- Modify Artworks ----------
 @login_required(login_url='/accounts/login')
 def ModifyArtworks(request, pk):
     artwork = get_object_or_404(Artwork, pk=pk)
+    form = ArtworkForm(initial={"name" : artwork.name, 'price' : artwork.price, 'image' : artwork.image})
     if request.method == "GET":
         return render(request, "modifyartworks.html", {
-        'form': ArtworkForm(),
-        'event': artwork,
+        'form': form,
+        'artwork': artwork,
         'role': get_member(request.user).role,
         'msg': request.GET.get('msg', None),
         'type': request.GET.get('type', None),
@@ -90,10 +91,90 @@ def ModifyArtworks(request, pk):
 
 
 def modify_data_artwork(request, artwork):
-	artist, name, art_type, price, image = get_artwork(request)
-	artwork.name = name
-	artwork.art_type = art_type
-	artwork.price = price
-	artwork.image = image
+    artist, name, art_type, price, image, delete = get_artwork_modified(request, artwork)
+    artwork.name = name
+    artwork.art_type = art_type
+    artwork.price = price
+    artwork.image = image
+    artwork.save()
+    if delete is True:
+        user = get_member(request.user)
+        artwork = Artwork.objects.filter(artist=user)
+        return render(request, "yourartworks.html", {
+        'role': get_member(request.user).role,
+        'msg': request.GET.get('msg', None),
+        'type': request.GET.get('type', None),
+        'artworks': artwork,
+        'errors': "The artwork has been deleted from the event due to the artwort type has changed"
+        })
+    else:
+        return HttpResponseRedirect(reverse('yourartworks'))
+
+def get_artwork_modified(request, artwork):
+	"""Gets the artwork attributes extracted from the html"""
+	artist = get_member(request.user)
+	type = artwork.art_type
+	delete = False
+	form = ArtworkForm(request.POST, request.FILES, initial={"name" : artwork.name,\
+	 'price' : artwork.price, 'image' : artwork.image})
+	art_type = request.POST.get('artwork_type', None)
+	if art_type!=type and artwork.state == 2:
+		delete_artwork_from_event(request, artwork)
+		delete = True
+	if form.is_valid():
+		name = form.cleaned_data['name']
+		price = form.cleaned_data['price']
+		image = form.cleaned_data['image']
+
+	return artist, name, art_type, price, image, delete
+
+def delete_artwork_from_event(request, artwork):
+	event = Event.objects.get(artwork=artwork)
+	event.artwork.remove(artwork)
+	artwork.state=1
 	artwork.save()
-	return HttpResponseRedirect(reverse('yourartworks'))
+	event.save()
+
+# ---------- Add Artwork to an Event ----------
+@login_required(login_url='/accounts/login')
+def addArtwork(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == "GET":
+        member = get_member(request.user)
+        try:
+            artworks = Artwork.objects.filter(artist=member, art_type=event.type, state=1)
+            return render(request, "addartwork.html", {
+            'artworks': artworks,
+            'role': get_member(request.user).role,
+            'msg': request.GET.get('msg', None),
+            'type': request.GET.get('type', None),
+             })
+        except:
+            return render(request, "addartwork.html", {
+            'error': "You don't have artworks to post in this event",
+            'role': get_member(request.user).role,
+            'msg': request.GET.get('msg', None),
+            'type': request.GET.get('type', None),
+            })
+    else:
+        return PostAdd(request, event)
+
+def PostAdd(request, event):
+	try:
+		member = get_member(request.user)
+		pk = request.POST.get('artwork', None)
+		artwork = Artwork.objects.get(pk=pk)
+		artwork.state = 2
+		event.artwork.add(artwork)
+		artwork.save()
+		event.save()
+		return HttpResponseRedirect(reverse('currentevents'))
+	except:
+		artworks = Artwork.objects.filter(artist=member, art_type=event.type, state=1)
+		return render(request, "addartwork.html", {
+		'errors': 'Error adding the artwork',
+		'artworks': artworks,
+		'role': get_member(request.user).role,
+		'msg': request.GET.get('msg', None),
+		'type': request.GET.get('type', None),
+		 })
