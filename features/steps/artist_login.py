@@ -5,14 +5,18 @@ import operator
 
 use_step_matcher("parse")
 
-@given(u'Exists a user "default_artist" with password "123pass"')
+@given(u'Exists a user "user" with password "password"')
 def step_impl(context):
     from django.contrib.auth.models import User
-    User.objects.create_user(username="user", email='user@example.com', password="password")
+    User.objects.create_user(username="user", email='user@example.com',\
+    password="password")
+
+@given(u'I am in the login page')
+def step_impl(context):
+    context.browser.visit(context.get_url('/accounts/login'))
 
 @given(u'I login as user "user" with password "password"')
 def step_impl(context):
-    context.browser.visit(context.get_url('/accounts/login'))
     context.browser.fill('usernamelogin', "user")
     context.browser.fill('passwordlogin', "password")
 

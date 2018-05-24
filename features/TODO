@@ -1,0 +1,13 @@
+-login user
+create user
+
+create artwork
+create event
+
+modify artwork
+modify event
+
+delete artwork
+delete event
+
+add artwork to event
