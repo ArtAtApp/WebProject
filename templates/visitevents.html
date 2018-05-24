@@ -1,0 +1,18 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+<div class="menuSeparator"></div>
+  {% for a in artworks %}
+    <div class="eventWrapper">
+    <div>{{ a.name }}</div>
+      <div class="w3-col l3 s12">
+        <div class="w3-card w3-round-large w3-display-container eventBody" style="background-image: url('/media/{{a.image}}')">
+          <div class="w3-container w3-padding">
+          </div>
+        </div>
+      </div>
+    </div>
+{% empty %}
+<div class="w3-container w3-center">
+    <h4 class="w3-text-gray">No artworks yet.</h4>
+</div>
+{% endfor %}
+{% endblock content %}
