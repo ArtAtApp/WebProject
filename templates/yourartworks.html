@@ -4,12 +4,12 @@
   {% for e in artworks %}
   <link rel="stylesheet" href="/media/{{e.image}}">
   <div  style="height: 600px; width:600px; margin: 0 auto; ">
-    <div class="w3-card w3-round-large" style="margin-top: 150px; background-color: #eafcf3"><h1 class="w3-xxlarge w3-hover-text-teal" style="text-align:center">{{ e.name }}</h1></div>
+    <div class="w3-card w3-round-large" style="margin-top: 150px; background-color: #eafcf3"><h1 class="w3-xxlarge " style="text-align:center">{{ e.name }}</h1></div>
     <div class="w3-col l2 s12" style=" height: 600px; width:600px ">
       <div class="w3-card w3-round-large w3-display-container" >
         <div class="w3-container w3-padding">
-          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="modifyEvent('{{ e.pk }}')" style="float:left;">Modify</button>
-          <button class="w3-button w3-round-xxlarge w3-aqua" onclick="deleteEvent('{{ e.pk }}')" style="float:right;">Delete</button>
+          <div class="bttn" onclick="modifyEvent('{{ e.pk }}')" style="float:left;">Modify</div>
+          <div class="bttn" onclick="deleteEvent('{{ e.pk }}')" style="float:right;">Delete</div>
         </div>
         <div  style="background-color: #eafcf3;  margin: 0 auto" >
 
