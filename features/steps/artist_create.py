@@ -3,7 +3,7 @@ from behave import *
 import operator
 
 
-use_step_matcher("parse")S
+use_step_matcher("parse")
 
 @when(u'I fill all the fields correctly')
 def step_impl(context):

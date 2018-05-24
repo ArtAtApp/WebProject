@@ -8,7 +8,7 @@ Feature: Create Artwork
 
   Scenario: Post an artwork
     Given I login as user "user" with password "password"
-    When I register restaurant
+    When I post artwork
       | name        | artist        | date        | price        | image             | state        | art_type        |
       | KH          | user          | 12/5/2018   | 10           | /artworks/udl.png | 1            | Painting        |
     Then I'm viewing the details page for artworks by "user"
