@@ -2,31 +2,15 @@
 
 <div class="login-page">
   <div class="form">
-
-  <!-- <div class="form" style="margin-top: 150px" >
-      <form class="login-form">
-				<div>
-        	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name: {{event.name}}</label>
-				</div>
-				<div>
-					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date: {{event.ini_date}}</label>
-				</div>
-				<div>
-					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date: {{event.end_date}}</label>
-				</div>
-				<div>
-					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Type: {{event.type}}</label>
-				</div>
-      </form>
-  </div> -->
   <form class="login-form" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
   {{form.as_p}}
 
   <div>
     <label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Choose events type</label>
-    <select id="type" name="artwork_type" required>
-    <option value="Painting" selected="Painting">Painting</option>
+    <select class="bttn" style="width:250px; align-content: center" id="type" name="artwork_type" required>
+    <option disabled selected value="{{artwork.art_type}}">{{artwork.art_type}}</option>
+    <option value="Painting">Painting</option>
     <option value="Sculpture">Sculpture</option>
     <option value="Photography">Photography</option>
     </select>

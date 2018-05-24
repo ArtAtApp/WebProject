@@ -1,5 +1,5 @@
 {% extends "homepage.html" %}{% load staticfiles %} {% block content %}
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="w3-row-padding" style="align: center">
   {% for e in artworks %}
   <link rel="stylesheet" href="/media/{{e.image}}">
@@ -30,6 +30,11 @@
     <h1 class="w3-text-gray">No events yet.</h1>
 </div>
 {% endfor %}
+{% if errors %}
+  <script>
+    swal("", '{{ errors }}');
+  </script>
+{% endif %}
 </div>
 <script>
 function deleteEvent(id) {

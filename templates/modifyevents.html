@@ -22,23 +22,27 @@
       <form class="login-form" method="POST"> {% csrf_token %}
 				<div>
         	<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Event Name</label>
-        	<input type="text" id="name" name="name" placeholder="Event Name" required/>
+        	<input type="text" id="name" name="name" placeholder="Event Name" value="{{event.name}}"/>
 				</div>
 				<div>
 					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> Initial Date</label>
-        	<input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" required/>
+        	<input type="date" id="ini_date" name="ini_date" placeholder="Initial Date" value="{{event.ini_date|date:"Y-m-d"}}"/>
 				</div>
 				<div>
 					<label class="w3-left w3-text-gray w3-margin-bottom w3-margin-top"> End Date</label>
-        	<input type="date" id="end_date" name="end_date" placeholder="End date" required/>
+        	<input type="date" id="end_date" name="end_date" placeholder="End date" value="{{event.end_date|date:"Y-m-d"}}"/>
 				</div>
 				<div>
 					<label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Choose events type</label>
-	        <select id="type" name="type" required>
-	        <option value="Painting" selected="Painting">Painting</option>
-	        <option value="Sculpture">Sculpture</option>
-	        <option value="Photography">Photography</option>
-	        </select>
+          <div>
+            <br>
+  	        <select class="bttn" style="width:250px; align-content: center" id="type" name="type">
+            <option disabled selected value="{{event.type}}">"{{event.type}}"</option>
+  	        <option value="Painting">Painting</option>
+  	        <option value="Sculpture">Sculpture</option>
+  	        <option value="Photography">Photography</option>
+  	        </select>
+          </div>
 				</div>
 				<div>
         	<button style="margin-top: 50px" type="submit">Modify</button>
