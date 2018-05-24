@@ -8,7 +8,7 @@
           <div class="w3-container w3-padding">
             <div class="bttn" >Enter</div>
             {% if role == "Artist" %}
-            <div class="bttn addArtworkBttn" >Add Artwork</div>
+            <div class="bttn addArtworkBttn" onclick="addArtwork('{{e.pk}}')">Add Artwork</div>
             {% endif %}
           </div>
         </div>
@@ -19,4 +19,9 @@
     <h4 class="w3-text-gray">No events yet.</h4>
 </div>
 {% endfor %}
+<script>
+function addArtwork(id){
+  window.location.href = "/add/artwork/" + id
+}
+</script>
 {% endblock content %}

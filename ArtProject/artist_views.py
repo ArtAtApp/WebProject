@@ -97,3 +97,47 @@ def modify_data_artwork(request, artwork):
 	artwork.image = image
 	artwork.save()
 	return HttpResponseRedirect(reverse('yourartworks'))
+
+# ---------- Add Artwork to an Event ----------
+@login_required(login_url='/accounts/login')
+def addArtwork(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == "GET":
+        member = get_member(request.user)
+        try:
+            artworks = Artwork.objects.filter(artist=member, art_type=event.type, state=1)
+            return render(request, "addartwork.html", {
+            'artworks': artworks,
+            'role': get_member(request.user).role,
+            'msg': request.GET.get('msg', None),
+            'type': request.GET.get('type', None),
+             })
+        except:
+            return render(request, "addartwork.html", {
+            'error': "You don't have artworks to post in this event",
+            'role': get_member(request.user).role,
+            'msg': request.GET.get('msg', None),
+            'type': request.GET.get('type', None),
+            })
+    else:
+        return PostAdd(request, event)
+
+def PostAdd(request, event):
+	try:
+		member = get_member(request.user)
+		pk = request.POST.get('artwork', None)
+		artwork = Artwork.objects.get(pk=pk)
+		artwork.state = 2
+		event.artwork.add(artwork)
+		artwork.save()
+		event.save()
+		return HttpResponseRedirect(reverse('currentevents'))
+	except:
+		artworks = Artwork.objects.filter(artist=member, art_type=event.type, state=1)
+		return render(request, "addartwork.html", {
+		'errors': 'Error adding the artwork',
+		'artworks': artworks,
+		'role': get_member(request.user).role,
+		'msg': request.GET.get('msg', None),
+		'type': request.GET.get('type', None),
+		 })

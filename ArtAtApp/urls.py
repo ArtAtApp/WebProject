@@ -39,7 +39,8 @@ urlpatterns = [
     url(r'^delete/artwork/(?P<pk>\d+)', delete_artwork, name='deleteartworks'),
     url(r'^modify/artwork/(?P<pk>\d+)', ModifyArtworks, name='modifyartworks'),
     url(r'^ajax/validate_username/$', validate_username, name='validate_username'),
-    url(r'^current/events/$', CurrentEvents, name='currentevents')
+    url(r'^current/events/$', CurrentEvents, name='currentevents'),
+    url(r'^add/artwork/(?P<pk>\d+)', addArtwork, name='addartwork')
 
 ]
 

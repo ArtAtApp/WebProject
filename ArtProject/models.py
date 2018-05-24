@@ -49,7 +49,6 @@ class Artwork(models.Model):
 	artist = models.ForeignKey(Artist, related_name='edited_by', blank=False,\
 	null=False, on_delete = models.CASCADE)
 	name = models.CharField(blank=False, null=False, max_length=50)
-	art_type = models.CharField(max_length=30)
 	date = models.DateTimeField(default=date.today)
 	price = models.IntegerField()
 	image = models.ImageField(upload_to="artworks")
@@ -59,6 +58,12 @@ class Artwork(models.Model):
 		(3, 'Sold')
 	)
 	state = models.PositiveIntegerField(default=1, choices=STATES)
+	Types = (
+		('Painting', 'Painting'),
+		('Sculpture', 'Sculpture'),
+		('Photography', 'Photography'),
+	)
+	art_type = models.CharField('Type', blank=True, null=True, choices=Types, max_length=30)
 
 class Event(models.Model):
 	event_id = models.AutoField(primary_key=True)
