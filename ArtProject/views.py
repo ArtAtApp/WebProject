@@ -52,9 +52,19 @@ def get_events_in_date(request):
 		now = datetime.datetime.now()
 		if now >= ini_date and now <= end_date:
 			events.append(e)
-	print(events)
-	print("\n\n\n\n")
 	return events
+
+# ---------- Enter events ----------
+
+def visitEvent(request, pk):
+	event = get_object_or_404(Event, pk=pk)
+	artworks = event.artwork.all()
+	return render(request, "visitevents.html", {
+		'role': get_member(request.user).role,
+		'msg': request.GET.get('msg', None),
+		'type': request.GET.get('type', None),
+		'artworks': artworks,
+	})
 
 #--------- User Login ---------
 def UserLogin(request):

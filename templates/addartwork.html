@@ -1,0 +1,25 @@
+{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+{% if error %}
+<div>
+  <label style="font-size : 50px; text-align : center; margin-top:150px">{{errors}}</label>
+</div>
+{% else %}
+  <div class="form" style="margin-top: 150px" >
+      <form class="login-form" style="height:150px" method="POST"> {% csrf_token %}
+          <label style="font-size : 25px; text-align : center">Select your artwork</label>
+          <select class="bttn" style="width:250px; align-content: center" id="artwork" name="artwork" required>
+            <option disabled selected value>Select an artwork</option>
+            {% for e in artworks %}
+              <option value="{{e.pk}}">{{e.name}}</option>
+            {% endfor %}
+          </select>
+          <button class="bttn" style="margin-top:30px" type="submit">Add</button>
+      </form>
+  </div>
+{% endif %}
+{% if errors %}
+  <script>
+    swal("", '{{ errors }}',"error");
+  </script>
+{% endif %}
+  {% endblock content %}
