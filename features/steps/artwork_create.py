@@ -25,15 +25,15 @@ def step_impl(context):
     context.browser.visit(context.get_url('create_artwork'))
     assert context.browser.url == context.get_url('create_artwork')
 
-
 @when(u'I post artwork')
 def step_impl(context):
     form = context.browser.find_by_tag('form').first
     context.browser.fill('name', "KH")
     context.browser.fill('price', 10)
-    context.browser.fill('image', "C:/home/jcc30/Downloads/index.jpeg")
-    context.browser.fill('art_type', "Painting")
-    form.find_by_css('button.btn-success').first.click()
+    context.browser.attach_file('image', '/home/rdc2/Escritorio/graph.png')
+    #context.browser.fill('image', "C:/home/jcc30/Downloads/index.jpeg")
+    context.browser.select('artwork_type', "Painting")
+    form.find_by_name('button').first.click()
 
 @then(u'I\'m viewing the details page for artworks by "user"')
 def step_impl(context):
