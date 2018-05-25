@@ -2,12 +2,12 @@
 -create user
 
 create artwork : Error with upload image
--create event
+-create event : Have to be repaired
 
 -modify artwork
 -modify event
 
--delete artwork : Problem
+delete artwork : Problem
 delete event
 
 add artwork to event

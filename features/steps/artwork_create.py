@@ -45,5 +45,4 @@ def step_impl(context):
     from ArtProject.models import Artwork
     count = 1
     result = Artwork.objects.count()
-    print str(result) + "    NAANANNAAN"
     assert count == result
