@@ -93,7 +93,8 @@ def ModifyArtworks(request, pk):
 def modify_data_artwork(request, artwork):
     artist, name, art_type, price, image, delete = get_artwork_modified(request, artwork)
     artwork.name = name
-    artwork.art_type = art_type
+    if art_type is not None:
+        artwork.art_type = art_type
     artwork.price = price
     artwork.image = image
     artwork.save()
