@@ -2,32 +2,45 @@ from behave import *
 
 artist = None
 
-@given(u'Exists an artist "user" with password "password" and role "Artist"')
+@given(u'Exists a registered artist "user" with password "password" and role "Artist"')
 def step_impl(context):
-    context.browser.visit(context.get_url('/create/artwork'))
+    from ArtProject.models import Artist
+    from django.contrib.auth.models import User
+    user = User.objects.create_user(username="user", email='user@example.com',\
+    password="password")
+    artist = Artist(dni=1, user=user, first_name="J", last_name="L", phone_number="66",\
+    role="Artist", bank_account="111")
+    artist.save()
+
+@then(u'I log in')
+def step_impl(context):
+    context.browser.visit(context.get_url('login'))
+    context.browser.fill('usernamelogin', "user")
+    context.browser.fill('passwordlogin', "password")
+    form = context.browser.find_by_tag('form').first
+    form.find_by_name('login').first.click()
+    assert context.browser.url == context.get_url('currentevents')
+
+
+@then(u'I go to the create artwork page')
+def step_impl(context):
+    context.browser.visit(context.get_url('create_artwork'))
+    assert context.browser.url == context.get_url('create_artwork')
 
 
 @when(u'I post artwork')
 def step_impl(context):
-    # context.browser.visit(context.get_url('/create/artwork'))
-    #context.browser.select('role', 'Artist')
     form = context.browser.find_by_tag('form').first
-    for row in context.table:
-        for heading in row.headings:
-            if heading == "name":
-                context.browser.fill('name', "KH")
-            elif heading == "price":
-                context.browser.fill('price', 10)
-            elif heading == "image":
-                context.browser.fill('image', "/artworks/udl.png")
+    context.browser.fill('name', "KH")
+    context.browser.fill('price', 10)
+    context.browser.fill('image', "C:/home/jcc30/Downloads/index.jpeg")
     context.browser.fill('art_type', "Painting")
     form.find_by_css('button.btn-success').first.click()
-    # form.find_by_name('button').first.click()
 
 @then(u'I\'m viewing the details page for artworks by "user"')
 def step_impl(context):
     context.browser.visit(context.get_url('/your/artworks'))
-    # assert context.browser.url == context.get_url('/your/artworks')
+    assert context.browser.url == context.get_url('/your/artworks')
 
 @then(u'There are 1 artworks')
 def step_impl(context):

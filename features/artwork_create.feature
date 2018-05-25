@@ -4,10 +4,11 @@ Feature: Create Artwork
   I want to post an artwork
 
   Background: There is a registered user
-    Given Exists an artist "user" with password "password" and role "Artist"
+    Given Exists a registered artist "user" with password "password" and role "Artist"
+    Then I log in
+    And I go to the create artwork page
 
   Scenario: Post an artwork
-    Given I login as user "user" with password "password"
     When I post artwork
       | name        | artist        | date        | price        | image             | state        | art_type        |
       | KH          | user          | 12/5/2018   | 10           | /artworks/udl.png | 1            | Painting        |
