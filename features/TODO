@@ -1,13 +1,13 @@
 -login user
 -create user
 
-create artwork : Error with upload image
--create event : Have to be repaired
++create artwork : Error with upload image
+-create event
 
 -modify artwork
 -modify event
 
-delete artwork : Problem
++delete artwork : Problem
 delete event
 
 add artwork to event

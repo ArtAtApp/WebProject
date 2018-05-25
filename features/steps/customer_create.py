@@ -19,7 +19,6 @@ def step_impl(context):
     form = context.browser.find_by_tag('form').first
     form.find_by_name('signup').first.click()
 
-
 @then(u'my user is created successfully')
 def step_impl(context):
     assert context.browser.url == context.get_url('currentevents')
