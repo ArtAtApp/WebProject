@@ -33,11 +33,8 @@ def step_impl(context):
     from django.contrib.auth.models import User
     import datetime
 
-    mybirthday= datetime.date(1987, 6,15)
     ini_date = datetime.date(2017, 4, 1)
     end_date = datetime.date(2019, 6, 1)
-    print(ini_date)
-    print(end_date)
 
     user = User.objects.create_user(username="orga", email='user@example.com',\
     password="password")
@@ -53,30 +50,45 @@ def step_impl(context):
 @when(u'I enter in')
 def step_impl(context):
     from ArtProject.models import Event
-    context.browser.find_by_name('prova')
-    # context.browser.find_by_name('enter').first.click()
-    # event = Event.objects.get()
-    # assert context.browser.url == context.get_url('visitevent' + str(event.pk))
+    event = Event.objects.get()
+    context.browser.visit(context.get_url('/visit/event/' + str(event.pk)))
+    assert context.browser.url == context.get_url('/visit/event/' + str(event.pk))
 
 
 @when(u'there are not any artworks')
 def step_impl(context):
     from ArtProject.models import Event
     event = Event.objects.get()
-    print(event.artwork)
-    raise NotImplementedError(u'STEP: When there are not any artworks')
+    assert str(event.artwork) == "ArtProject.Artwork.None"
 
 
 @then(u'I go back to current events')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I go back to current events')
+    context.browser.visit(context.get_url('currentevents'))
+    assert context.browser.url == context.get_url('currentevents')
 
 
 @then(u'I select add artwork to an event')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I select add artwork to an event')
+    from ArtProject.models import Event
+    event = Event.objects.get()
+    context.browser.visit(context.get_url('/add/artwork/' + str(event.pk)))
+    assert context.browser.url == context.get_url('/add/artwork/' + str(event.pk))
 
 
 @then(u'I select one of my artworks of the same type as the event')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I select one of my artworks of the same type as the event')
+    from ArtProject.models import Artwork
+    artwork = Artwork.objects.get()
+    context.browser.select('artwork', artwork.artwork_id)
+    form = context.browser.find_by_tag('form').first
+    form.find_by_name('add').first.click()
+    assert context.browser.url == context.get_url('currentevents')
+
+
+@then(u'There are 1 artworks in the event')
+def step_impl(context):
+    from ArtProject.models import Event
+    event = Event.objects.get()
+    print (event.artwork)
+    assert str(event.artwork) == "ArtProject.Artwork.None"

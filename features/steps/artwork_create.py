@@ -27,10 +27,13 @@ def step_impl(context):
 
 @when(u'I post artwork')
 def step_impl(context):
+    import os
+    cwd = os.getcwd() + "/media/artworks/41022.jpg"
+    print cwd
     form = context.browser.find_by_tag('form').first
     context.browser.fill('name', 'KH')
     context.browser.fill('price', 10)
-    context.browser.attach_file('image', '/home/rdc2/Escritorio/graph.png')
+    context.browser.attach_file('image', cwd)
     context.browser.select('artwork_type', 'Painting')
     form.find_by_name('button').first.click()
 

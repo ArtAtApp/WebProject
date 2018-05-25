@@ -1,4 +1,4 @@
-Feature: Create Artwork
+Feature: Add artwork to an event
   In order to show my artworks
   As an artist
   I want to add an artwork to an event
@@ -19,4 +19,4 @@ Feature: Create Artwork
     Then I select one of my artworks of the same type as the event
       | name        | artist        | date        | price        | image             | state        | art_type        |
       | KH          | user          | 12/5/2018   | 10           | /artworks/udl.png | 1            | Painting        |
-    And There are 1 artworks
+    And There are 1 artworks in the event
