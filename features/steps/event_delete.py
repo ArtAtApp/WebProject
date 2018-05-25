@@ -40,10 +40,7 @@ def step_impl(context):
 
 @then(u'I click on the delete button')
 def step_impl(context):
-    #Here we supposo to click the button delete, but due to javscript we can't
-    #test it, so we will delete the event manuallyself.
-    from ArtProject.models import Event
-    Event.objects.get().delete()
+    context.browser.find_by_name('delete').first.click()
 
 
 

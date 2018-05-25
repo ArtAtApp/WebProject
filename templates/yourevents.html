@@ -35,21 +35,7 @@
 </div>
 <script>
 function deleteEvent(id) {
-        swal({
-                title: "Are you sure?",
-                text: "Do you want to delete the artwork? ",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then(function (willDelete) {
-                if (willDelete) {
-                    swal("OK!", "Artwork was succesfully deleted", "success").then(function () {
-                        window.location.href = "/delete/event/" + id + "?next=" + window.location.pathname;
-                    });
-                } else {
-                }
-            });
+    window.location.href = "/delete/event/" + id + "?next=" + window.location.pathname;
     }
 function modifyEvent(id){
   window.location.href = "/modify/event/" + id
