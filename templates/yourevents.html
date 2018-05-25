@@ -1,14 +1,14 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
 
-<div class="menuSeparator"></div>
+<div class="menuSeparator" name="yourevents"></div>
   {% for e in events %}
   <div class="eventWrapper">
   <div>{{ e.name }}</div>
     <div class="w3-col l3 s12">
       <div class="w3-card w3-round-large w3-display-container eventBody" style="background-image: url('{% static 'img/images.jpeg' %}')">
         <div class="w3-container w3-padding">
-          <div class="bttn" onclick="modifyEvent('{{ e.pk }}')">Modify</div>
-          <div class="bttn" onclick="deleteEvent('{{ e.pk }}')">Delete</div>
+          <div class="bttn" name="modify" onclick="modifyEvent('{{ e.pk }}')">Modify</div>
+          <div class="bttn" name="delete" onclick="deleteEvent('{{ e.pk }}')">Delete</div>
         </div>
       </div>
     </div>

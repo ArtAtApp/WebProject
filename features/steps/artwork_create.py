@@ -1,7 +1,5 @@
 from behave import *
 
-artist = None
-
 @given(u'Exists a registered artist "user" with password "password" and role "Artist"')
 def step_impl(context):
     from ArtProject.models import Artist
