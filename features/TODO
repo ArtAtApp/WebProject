@@ -4,10 +4,10 @@
 create artwork : Error with upload image
 -create event
 
-modify artwork
-modify event
+-modify artwork
+-modify event
 
--delete artwork
+-delete artwork : Problem
 delete event
 
 add artwork to event

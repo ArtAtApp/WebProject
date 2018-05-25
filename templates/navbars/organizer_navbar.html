@@ -1,25 +1,33 @@
 {% load staticfiles %}
 
+<style>
+.test {
+    background-color: tomato;
+    color: blue;
+    padding: 10px;
+}
+</style>
+
 <ul class="navbar-nav mr-auto">
   {% if request.path == '/current/events' %}
     <li class="nav-item active">
   {% else %}
     <li class="nav-item">
   {% endif %}
-        <a class="nav-link w3-margin-left" href="/current/events">
-            <i class="fa fa-home"></i> Current events
-            <span class="sr-only">(current)</span>
-        </a>
-    </li>
-    <li class="nav-item w3-margin-left">
-      {% if request.path == '/create/event' %}
-        <li class="nav-item active">
-      {% else %}
-        <li class="nav-item">
-      {% endif %}
-      <a class="nav-link" href="/create/event">Create an event</a>
-    </li>
-    <li class="nav-item w3-margin-left">
+    <a class="nav-link" href="/current/events">
+        <i class="fa fa-home"></i>
+        Current Events
+        <span class="sr-only">(current)</span>
+    </a></li>
+
+    {% if request.path == '/create/event' %}
+      <li class="nav-item active">
+    {% else %}
+      <li class="nav-item">
+    {% endif %}
+    <a class="nav-link" href="/create/event">Create event</a></li>
+
+
       {% if request.path == '/your/events' %}
         <li class="nav-item active">
       {% else %}
@@ -27,3 +35,4 @@
       {% endif %}
       <a class="nav-link" href="/your/events">Your events</a>
     </li>
+</ul>

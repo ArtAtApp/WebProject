@@ -1,37 +1,50 @@
-{% extends "homepage.html" %} {% load staticfiles %} {% block content %}
-
-<div class="menuSeparator" name="yourevents"></div>
+{% extends "homepage.html" %}{% load staticfiles %} {% block content %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="w3-row-padding" style="align: center">
   {% for e in events %}
-  <div class="eventWrapper">
-  <div>{{ e.name }}</div>
-    <div class="w3-col l3 s12">
-      <div class="w3-card w3-round-large w3-display-container eventBody" style="background-image: url('{% static 'img/images.jpeg' %}')">
+  <div  style="height: 200px; width:600px; margin: 0 auto; ">
+    <div class="w3-card w3-round-large" style="margin-top: 150px; background-color: #eafcf3"><h1 class="w3-xxlarge " style="text-align:center">{{ e.name }}</h1></div>
+    <div class="w3-col l2 s12" style=" height: 200px; width:600px ">
+      <div class="w3-card w3-round-large w3-display-container" >
         <div class="w3-container w3-padding">
-          <div class="bttn" name="modify" onclick="modifyEvent('{{ e.pk }}')">Modify</div>
-          <div class="bttn" name="delete" onclick="deleteEvent('{{ e.pk }}')">Delete</div>
+          <div class="bttn" name="modify" onclick="modifyEvent('{{ e.pk }}')" style="float:left;">Modify</div>
+          <div class="bttn" name="delete" onclick="deleteEvent('{{ e.pk }}')" style="float:right;">Delete</div>
+        </div>
+        <div  style="background-color: #eafcf3;  margin: 0 auto" >
+
+          <label style="font-size: 20px; padding-left:10px;"> Initial date : {{e.ini_date}}</label></br>
+          <label style="font-size: 20px; padding-left:10px;"> End date : {{e.end_date}}</label></br>
+          <label style="font-size: 20px; padding-left:10px;"> Type : {{e.type}}</label></br>
+
         </div>
       </div>
+
     </div>
   </div>
-
+</div>
 {% empty %}
 <div class="w3-container w3-center">
-    <h4 class="w3-text-gray">No events yet.</h4>
+    <h1 class="w3-text-gray">No events yet.</h1>
 </div>
 {% endfor %}
+{% if errors %}
+  <script>
+    swal("", '{{ errors }}');
+  </script>
+{% endif %}
 </div>
 <script>
 function deleteEvent(id) {
         swal({
                 title: "Are you sure?",
-                text: "Do you want to delete the event? ",
+                text: "Do you want to delete the artwork? ",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
             })
             .then(function (willDelete) {
                 if (willDelete) {
-                    swal("OK!", "Event was succesfully deleted", "success").then(function () {
+                    swal("OK!", "Artwork was succesfully deleted", "success").then(function () {
                         window.location.href = "/delete/event/" + id + "?next=" + window.location.pathname;
                     });
                 } else {

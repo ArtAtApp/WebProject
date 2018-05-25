@@ -8,7 +8,7 @@
 
   <div>
     <label class="w3-left w3-text-gray w3-margin-bottom" for="user"> Choose events type</label>
-    <select class="bttn" style="width:250px; align-content: center" id="type" name="artwork_type" required>
+    <select class="bttn" style="width:250px; align-content: center" id="type" name="artwork_type">
     <option disabled selected value="{{artwork.art_type}}">{{artwork.art_type}}</option>
     <option value="Painting">Painting</option>
     <option value="Sculpture">Sculpture</option>
@@ -16,7 +16,7 @@
     </select>
   </div>
 
-    <button type="submit">Modify</button>
+    <button class="modify" type="submit" name="modify">Modify</button>
 
   </form>
   </div>
