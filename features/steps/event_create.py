@@ -27,16 +27,16 @@ def step_impl(context):
 
 @when(u'I post events')
 def step_impl(context):
-    from datetime import datetime
-    from datetime import date
-    dt = str(datetime.today())
+    import datetime
+    ini_date = datetime.date(2017, 4, 1)
+    end_date = datetime.date(2019, 6, 1)
     context.browser.fill('name', "KH")
-    context.browser.fill('ini_date', dt)
-    context.browser.fill('end_date', dt)
+    context.browser.fill('ini_date', str(ini_date))
+    context.browser.fill('end_date', str(end_date))
     context.browser.select('type', "Painting")
     form = context.browser.find_by_tag('form').first
-    form.find_by_id('button').first.click()
+    form.find_by_name('create').first.click()
 
 @then(u'I get redirected to create event')
 def step_impl(context):
-    assert context.browser.url == context.get_url('createevent')
+    assert context.browser.url == context.get_url('currentevents')
