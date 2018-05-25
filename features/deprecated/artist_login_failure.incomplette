@@ -1,0 +1,15 @@
+Feature: Log in failure
+    In order to be redirected if I type a wrong user
+    As an user who types its username or password incorrectly
+    I want to be redirected back to the login to try again
+
+    Background: There is a registered user
+        Given Exists a user "user" with password "password" f
+
+    Scenario: Log in with wrong credentials
+        Given I am in the login page f
+        Given I login as user "user" with password "piss word" which is incorrect f
+        When I log in f
+            | username | password  |
+            | user     | piss word |
+        Then I get redirected to the login again f
