@@ -1,4 +1,42 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
+<span vocab="http://schema.org/" typeof="Event">
+
+<h1 style="margin-top:200px">
+    <span property="name">{{ e.name }}</span>
+    {% if member == e.created_by %}
+        (<a href="/modify/event/{{event.pk}}">edit</a>)
+    {% endif %}
+</h1>
+
+<h2>Initial date:</h2>
+<p property="startDate">
+    {{e.ini_date}}
+</p>
+
+<h2>End date:</h2>
+<p property="endDate">
+    {{e.end_date}}
+</p>
+
+<ul rel="offers">
+    {% for a in artworks %}
+    <p property="price">{{a.price}}</p>
+    <p property="availability">{{a.state}}</p>
+    {% endfor %}
+</ul>
+
+<h2>Type:</h2>
+<p property="description">
+    {{e.type}}
+</p>
+
+<h2>Created_by:</h2>
+<p property="performer">
+    {{e.created_by}}
+</p>
+
+</span>
+
 <div class="menuSeparator"></div>
   {% for a in artworks %}
     <div class="eventWrapper">

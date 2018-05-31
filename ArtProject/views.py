@@ -57,13 +57,17 @@ def get_events_in_date(request):
 # ---------- Enter events ----------
 
 def visitEvent(request, pk):
-	event = get_object_or_404(Event, pk=pk)
+	#event = get_object_or_404(Event, pk=pk)
+	#artworks = event.artwork.all()
+	event  = Event.objects.get(pk=pk)
 	artworks = event.artwork.all()
 	return render(request, "visitevents.html", {
 		'role': get_member(request.user).role,
-		'msg': request.GET.get('msg', None),
-		'type': request.GET.get('type', None),
+		'member': get_member(request.user),
+		# 'msg': request.GET.get('msg', None),
+		# 'type': request.GET.get('type', None),
 		'artworks': artworks,
+		'e': event,
 	})
 
 #--------- User Login ---------
