@@ -1,40 +1,45 @@
 {% extends "homepage.html" %} {% load staticfiles %} {% block content %}
 <span vocab="http://schema.org/" typeof="Event">
-
 <h1 style="margin-top:200px">
     <span property="name">{{ e.name }}</span>
     {% if member == e.created_by %}
         (<a href="/modify/event/{{event.pk}}">edit</a>)
     {% endif %}
 </h1>
-
 <h2>Initial date:</h2>
 <p property="startDate">
-    {{e.ini_date}}
+    2018-03-04
 </p>
-
 <h2>End date:</h2>
 <p property="endDate">
-    {{e.end_date}}
+    2018-09-09
 </p>
-
+<h2>Location:</h2>
+<div property="location" typeof="Place">
+    <a property="url" href="wells-fargo-center.html">
+    Event has no location
+    </a>
+    <span property="name">Event has no location</span>
+    <div property="address" typeof="PostalAddress">
+      <span property="addressLocality">No adress</span>
+    </div>
+  </div>
 <ul rel="offers">
     {% for a in artworks %}
-    <p property="price">{{a.price}}</p>
+    <p property="price">10</p>
     <p property="availability">{{a.state}}</p>
+    <p property="priceCurrency">10</p>
+    <p property="validFrom">2018-03-04</p>
     {% endfor %}
 </ul>
-
 <h2>Type:</h2>
 <p property="description">
     {{e.type}}
 </p>
-
 <h2>Created_by:</h2>
 <p property="performer">
     {{e.created_by}}
 </p>
-
 </span>
 
 <div class="menuSeparator"></div>
